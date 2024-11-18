@@ -3,7 +3,7 @@ name: Deploy and Release
 on:
   push:
     tags:
-      - 'v*.*.*'  # Triggers workflow for tags like v1.0.0
+      - 'v*.*.*' # Triggers workflow on version tags like v1.0.0
 
 jobs:
   build-and-deploy:
@@ -20,12 +20,21 @@ jobs:
         with:
           terraform_version: 1.4.6
 
-      # Terraform: Initialize and Apply
-      - name: Terraform Init and Apply
-        run: |
-          terraform init
-          terraform apply -auto-approve
-          terraform output -json > inventory.json
+      # Clean Terraform Cache
+      - name: Clean Terraform Cache
+        run: rm -rf .terraform .terraform.lock.hcl
+
+      # Terraform Init
+      - name: Terraform Init
+        run: terraform init
+
+      # Fix Provider Plugin Permissions
+      - name: Fix Provider Plugin Permissions
+        run: chmod +x .terraform/providers/registry.terraform.io/opennebula/opennebula/*/linux_amd64/terraform-provider-opennebula_*
+
+      # Terraform Apply
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
 
       # Generate Ansible Inventory
       - name: Generate Ansible Inventory
@@ -41,14 +50,14 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    needs: build-and-deploy  # Depends on the build-and-deploy job
+    needs: build-and-deploy # Ensures this runs after the deploy job
 
     steps:
       # Checkout the repository
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      # Create a release
+      # Create a Release
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
