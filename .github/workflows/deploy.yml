@@ -23,8 +23,9 @@ jobs:
       # Generate SSH Key
       - name: Generate SSH Key
         run: |
-          mkdir -p /var/iac-dev-container-data
-          ssh-keygen -t ecdsa -b 521 -N '' -f /var/iac-dev-container-data/id_ecdsa
+          mkdir -p $GITHUB_WORKSPACE/iac-dev-container-data
+          ssh-keygen -t ecdsa -b 521 -N '' -f $GITHUB_WORKSPACE/iac-dev-container-data/id_ecdsa
+
 
       # Clean Terraform Cache
       - name: Clean Terraform Cache
