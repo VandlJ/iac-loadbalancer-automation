@@ -1,0 +1,5 @@
+- name: Configure all VMs
+  hosts: all
+  become: true
+  roles:
+    - common

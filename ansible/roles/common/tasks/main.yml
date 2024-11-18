@@ -1,0 +1,8 @@
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install Midnight Commander
+  apt:
+    name: mc
+    state: present

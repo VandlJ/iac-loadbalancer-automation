@@ -1,0 +1,7 @@
+{
+  "vm_ips": {
+    "sensitive": false,
+    "type": "string",
+    "value": "147.228.173.172"
+  }
+}

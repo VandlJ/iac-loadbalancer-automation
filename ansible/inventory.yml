@@ -1,0 +1,7 @@
+---
+all:
+  hosts:
+    147.228.173.172:
+  vars:
+    ansible_user: root
+    ansible_ssh_private_key_file: /var/iac-dev-container-data/id_ecdsa
