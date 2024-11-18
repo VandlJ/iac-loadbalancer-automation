@@ -53,7 +53,10 @@ jobs:
 
       # Run Ansible Playbook
       - name: Run Ansible Playbook
+        env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}
         run: ansible-playbook -i ansible/inventory.yml ansible/playbook.yml
+
 
   release:
     runs-on: ubuntu-latest
