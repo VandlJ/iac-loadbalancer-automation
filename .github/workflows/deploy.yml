@@ -20,6 +20,12 @@ jobs:
         with:
           terraform_version: 1.4.6
 
+      # Generate SSH Key
+      - name: Generate SSH Key
+        run: |
+          mkdir -p /var/iac-dev-container-data
+          ssh-keygen -t ecdsa -b 521 -N '' -f /var/iac-dev-container-data/id_ecdsa
+
       # Clean Terraform Cache
       - name: Clean Terraform Cache
         run: rm -rf .terraform .terraform.lock.hcl

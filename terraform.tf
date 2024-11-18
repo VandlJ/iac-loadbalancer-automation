@@ -59,7 +59,7 @@ resource "opennebula_virtual_machine" "vmnode-1" {
     type = "ssh"
     user = "root"
     host = "${self.ip}"
-    private_key = "${file("/var/iac-dev-container-data/id_ecdsa")}"
+    private_key = "/var/iac-dev-container-data/id_ecdsa"
   }
 
   provisioner "file" {
