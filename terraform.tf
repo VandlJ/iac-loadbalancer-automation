@@ -47,7 +47,7 @@ resource "opennebula_virtual_machine" "backend-node" {
   disk {
     image_id = opennebula_image.os-image.id
     target   = "vda"
-    size     = 12000 # 12GB
+    size     = 12000 
   }
 
   graphics {

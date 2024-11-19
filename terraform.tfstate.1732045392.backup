@@ -1,24 +1,22 @@
 {
   "version": 4,
   "terraform_version": "1.9.7",
-  "serial": 143,
+  "serial": 116,
   "lineage": "36bd2cbc-00e8-b825-aca5-2d749bb01ebc",
   "outputs": {
     "backend_ips": {
       "value": [
-        "147.228.173.166",
-        "147.228.173.168"
+        "147.228.173.166"
       ],
       "type": [
         "tuple",
         [
-          "string",
           "string"
         ]
       ]
     },
     "load_balancer_ip": {
-      "value": "147.228.173.166",
+      "value": "147.228.173.168",
       "type": "string"
     }
   },
@@ -42,7 +40,7 @@
             "gid": 1,
             "gname": "users",
             "group": null,
-            "id": "762",
+            "id": "760",
             "lock": null,
             "name": "Ubuntu Minimal 24.04",
             "path": "https://marketplace.opennebula.io//appliance/44077b30-f431-013c-b66a-7875a4a4f528/download/0",
@@ -71,7 +69,7 @@
       "provider": "provider[\"registry.terraform.io/opennebula/opennebula\"]",
       "instances": [
         {
-          "index_key": 1,
+          "index_key": 0,
           "schema_version": 0,
           "attributes": {
             "context": {
@@ -83,29 +81,7 @@
             "cpumodel": [],
             "default_tags": {},
             "description": "Backend Node",
-            "disk": [
-              {
-                "cache": "",
-                "computed_cache": "",
-                "computed_dev_prefix": "sd",
-                "computed_discard": "",
-                "computed_driver": "raw",
-                "computed_io": "",
-                "computed_size": 12000,
-                "computed_target": "vda",
-                "computed_volatile_format": "raw",
-                "dev_prefix": "",
-                "discard": "",
-                "disk_id": 0,
-                "driver": "",
-                "image_id": 762,
-                "io": "",
-                "size": 12000,
-                "target": "vda",
-                "volatile_format": "",
-                "volatile_type": ""
-              }
-            ],
+            "disk": [],
             "gid": 1,
             "gname": "users",
             "graphics": [
@@ -113,26 +89,26 @@
                 "keymap": "en-us",
                 "listen": "0.0.0.0",
                 "passwd": "",
-                "port": "10471",
+                "port": "10463",
                 "random_passwd": false,
                 "type": "vnc"
               }
             ],
             "group": "users",
             "hard_shutdown": false,
-            "id": "4571",
-            "ip": "147.228.173.164",
+            "id": "4563",
+            "ip": "147.228.173.166",
             "keep_nic_order": null,
             "lcmstate": 3,
             "lock": null,
             "memory": 1024,
-            "name": "backend-2",
+            "name": "backend-1",
             "nic": [
               {
                 "computed_dns": "147.228.3.3",
                 "computed_gateway": "147.228.173.1",
-                "computed_ip": "147.228.173.164",
-                "computed_mac": "52:54:00:17:30:a4",
+                "computed_ip": "147.228.173.166",
+                "computed_mac": "52:54:00:17:30:a6",
                 "computed_method": "",
                 "computed_model": "",
                 "computed_physical_device": "bond1",
@@ -213,18 +189,18 @@
               {
                 "cache": "",
                 "computed_cache": "",
-                "computed_dev_prefix": "sd",
+                "computed_dev_prefix": "",
                 "computed_discard": "",
-                "computed_driver": "raw",
+                "computed_driver": "",
                 "computed_io": "",
-                "computed_size": 12000,
-                "computed_target": "vda",
-                "computed_volatile_format": "raw",
+                "computed_size": 0,
+                "computed_target": "",
+                "computed_volatile_format": "",
                 "dev_prefix": "",
                 "discard": "",
                 "disk_id": 0,
                 "driver": "",
-                "image_id": 762,
+                "image_id": 760,
                 "io": "",
                 "size": 12000,
                 "target": "vda",
@@ -237,8 +213,8 @@
             "graphics": [],
             "group": "users",
             "hard_shutdown": false,
-            "id": "4569",
-            "ip": "147.228.173.166",
+            "id": "4564",
+            "ip": "147.228.173.168",
             "keep_nic_order": null,
             "lcmstate": 3,
             "lock": null,
@@ -248,8 +224,8 @@
               {
                 "computed_dns": "147.228.3.3",
                 "computed_gateway": "147.228.173.1",
-                "computed_ip": "147.228.173.166",
-                "computed_mac": "52:54:00:17:30:a6",
+                "computed_ip": "147.228.173.168",
+                "computed_mac": "52:54:00:17:30:a8",
                 "computed_method": "",
                 "computed_model": "",
                 "computed_physical_device": "bond1",
