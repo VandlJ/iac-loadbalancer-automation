@@ -33,7 +33,7 @@ resource "opennebula_virtual_machine" "vmnode-1" {
   context = {
     NETWORK  = "YES"
     HOSTNAME = "$NAME"
-    SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBABfQJIhqxaahzznDkHKnWBYPnXkSYo3/uLcTYBpMzE3j4xvYlDOG/dUw7nHHYytuzcQ885VZrg8eJvf2/I84bGZ2QDHrH2/WV45qReBqRGoKmFPgYZwHmWa9bU4Rv0QYxGW6Io2f58GPH/w7VjcMu+K3xP91Im7XtjFQzRkr/3hsLrJTw== root@238ba4651c22"
+    SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBABzwJmMztkXw6yKQ6/9JoXLjO9n10cbUhaoPQuSe33SwSk3CdCXkGoQ/lzMgN8Dnopc5DGZ7YcN+3+ilGQDOq8l+QExUKj59mlyrte7HlrasW93AnXnNac6DvsK69RjrLEv4TgwfUK+cFfdUtKKg0loj+Oxahx3OASXKSpSzXktaRRspA== root@f67fd4d48296"
     START_SCRIPT = "echo 'Byl jsem tady.' >> /etc/my-message"
   }
   os {
@@ -59,7 +59,7 @@ resource "opennebula_virtual_machine" "vmnode-1" {
     type = "ssh"
     user = "root"
     host = "${self.ip}"
-    private_key = "${path.module}/iac-dev-container-data/id_ecdsa"
+    private_key = "${file("/var/iac-dev-container-data/id_ecdsa")}"
   }
 
   provisioner "file" {
