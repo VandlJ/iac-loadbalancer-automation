@@ -1,7 +1,16 @@
 {
   "vm_ips": {
     "sensitive": false,
-    "type": "string",
-    "value": "147.228.173.172"
+    "type": [
+      "tuple",
+      [
+        "string",
+        "string"
+      ]
+    ],
+    "value": [
+      "147.228.173.172",
+      "147.228.173.173"
+    ]
   }
 }

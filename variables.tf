@@ -8,3 +8,7 @@ variable "opennebula_username"  {
 variable "opennebula_password"  {
     description = "Open Nebula login token"
 }
+variable "cluster_size" {
+  description = "Number of cluster nodes"
+  default = 3
+}

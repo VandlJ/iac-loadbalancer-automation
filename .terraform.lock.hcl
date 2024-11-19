@@ -6,6 +6,7 @@ provider "registry.terraform.io/opennebula/opennebula" {
   constraints = "~> 1.2"
   hashes = [
     "h1:rA0zOeBGzJl1hVgZ6zrs7FXTpFJsNTqNBQ4cu2qNFIs=",
+    "h1:u6/WtZRFmnm9nco4RWrOa93vojtpTEFymYOWiqn4Yc0=",
     "zh:1263edefe31b9c5f0842623f45d3b37253e554182e63aff20f84ba482f2c88cd",
     "zh:1fa5f67d82b86fa6867f352d5f15f3981662e98b4598f3ed9a1e20e60143cc4a",
     "zh:322e31c234f8965e7b42a617b5ec8d01a57cd5e5f4eb91667415930cbeff66b8",

@@ -21,19 +21,20 @@ resource "opennebula_image" "os-image" {
   permissions = "600"
 }
 
-resource "opennebula_virtual_machine" "vmnode-1" { 
-  permissions = "600"
-  name = "vmnode-1"
+resource "opennebula_virtual_machine" "cluster-node" { 
+  count = var.cluster_size
+  name = "vmnode-${count.index + 1}"
   description = "Main node VM"
   cpu = 1
   vcpu = 1
   memory = 2048
+  permissions = "600"
   group = "users"
 
   context = {
     NETWORK  = "YES"
     HOSTNAME = "$NAME"
-    SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBABzwJmMztkXw6yKQ6/9JoXLjO9n10cbUhaoPQuSe33SwSk3CdCXkGoQ/lzMgN8Dnopc5DGZ7YcN+3+ilGQDOq8l+QExUKj59mlyrte7HlrasW93AnXnNac6DvsK69RjrLEv4TgwfUK+cFfdUtKKg0loj+Oxahx3OASXKSpSzXktaRRspA== root@f67fd4d48296"
+    SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2"
     START_SCRIPT = "echo 'Byl jsem tady.' >> /etc/my-message"
   }
   os {
@@ -92,5 +93,5 @@ resource "opennebula_virtual_machine" "vmnode-1" {
 
 output "vm_ips" {
   description = "IP addresses of the VMs"
-  value = opennebula_virtual_machine.vmnode-1.ip
+  value = opennebula_virtual_machine.cluster-node.*.ip
 }
