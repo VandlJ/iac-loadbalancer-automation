@@ -1,5 +1,5 @@
 {
-  "vm_ips": {
+  "backend_ips": {
     "sensitive": false,
     "type": [
       "tuple",
@@ -9,8 +9,13 @@
       ]
     ],
     "value": [
-      "147.228.173.172",
-      "147.228.173.173"
+      "147.228.173.174",
+      "147.228.173.172"
     ]
+  },
+  "load_balancer_ip": {
+    "sensitive": false,
+    "type": "string",
+    "value": "147.228.173.173"
   }
 }

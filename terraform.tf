@@ -13,34 +13,37 @@ provider "opennebula" {
   password      = "${var.opennebula_password}"
 }
 
+# Image resource for all VMs
 resource "opennebula_image" "os-image" {
-  name = "Ubuntu Minimal 24.04"
+  name        = "Ubuntu Minimal 24.04"
   datastore_id = 101
-  persistent = false
-  path = "https://marketplace.opennebula.io//appliance/44077b30-f431-013c-b66a-7875a4a4f528/download/0"
+  persistent  = false
+  path        = "https://marketplace.opennebula.io//appliance/44077b30-f431-013c-b66a-7875a4a4f528/download/0"
   permissions = "600"
 }
 
-resource "opennebula_virtual_machine" "cluster-node" { 
-  count = var.cluster_size
-  name = "vmnode-${count.index + 1}"
-  description = "Main node VM"
-  cpu = 1
-  vcpu = 1
-  memory = 2048
-  permissions = "600"
-  group = "users"
+# Configurable backend nodes
+resource "opennebula_virtual_machine" "backend-node" {
+  count        = var.backend_count
+  name         = "backend-${count.index + 1}"
+  description  = "Backend Node"
+  cpu          = 1
+  vcpu         = 1
+  memory       = 1024
+  permissions  = "600"
+  group        = "users"
 
   context = {
     NETWORK  = "YES"
     HOSTNAME = "$NAME"
     SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2"
-    START_SCRIPT = "echo 'Byl jsem tady.' >> /etc/my-message"
   }
+
   os {
     arch = "x86_64"
     boot = "disk0"
   }
+
   disk {
     image_id = opennebula_image.os-image.id
     target   = "vda"
@@ -63,16 +66,6 @@ resource "opennebula_virtual_machine" "cluster-node" {
     private_key = "${file("/var/iac-dev-container-data/id_ecdsa")}"
   }
 
-  provisioner "file" {
-    source = "provisioned-files/soubor-1.cfg"
-    destination = "/etc/file-one.cfg"
-  }
-
-  provisioner "file" {
-    source = "provisioned-files/soubor-2.cfg"
-    destination = "/etc/file-two.cfg"
-  }
-
   provisioner "remote-exec" {
     inline = [
       "export DEBIAN_FRONTEND=noninteractive", 
@@ -89,9 +82,52 @@ resource "opennebula_virtual_machine" "cluster-node" {
   }
 }
 
-#----OUTPUTS----
+# Load balancer (NGINX)
+resource "opennebula_virtual_machine" "load-balancer" {
+  name         = "nginx-load-balancer"
+  description  = "NGINX Load Balancer"
+  cpu          = 1
+  vcpu         = 1
+  memory       = 1024
+  permissions  = "600"
+  group        = "users"
 
-output "vm_ips" {
-  description = "IP addresses of the VMs"
-  value = opennebula_virtual_machine.cluster-node.*.ip
+  context = {
+    NETWORK       = "YES"
+    HOSTNAME      = "$NAME"
+    SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2"
+  }
+
+  os {
+    arch = "x86_64"
+    boot = "disk0"
+  }
+
+  disk {
+    image_id = opennebula_image.os-image.id
+    target   = "vda"
+    size     = 12000
+  }
+
+  nic {
+    network_id = 3
+  }
+
+  connection {
+    type        = "ssh"
+    user        = "root"
+    host        = "${self.ip}"
+    private_key = "${file("/var/iac-dev-container-data/id_ecdsa")}"
+  }
+}
+
+# Outputs
+output "backend_ips" {
+  description = "IP addresses of the backend VMs"
+  value       = opennebula_virtual_machine.backend-node.*.ip
+}
+
+output "load_balancer_ip" {
+  description = "IP address of the load balancer"
+  value       = opennebula_virtual_machine.load-balancer.ip
 }

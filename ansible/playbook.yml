@@ -1,5 +1,11 @@
-- name: Configure all VMs
-  hosts: all
+- name: Configure Backends
+  hosts: backends
   become: true
   roles:
-    - common
+    - backend
+
+- name: Configure Load Balancer
+  hosts: load_balancer
+  become: true
+  roles:
+    - load_balancer

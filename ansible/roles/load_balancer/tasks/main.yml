@@ -1,0 +1,44 @@
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install Docker
+  apt:
+    name: docker.io
+    state: present
+  become: yes
+
+- name: Ensure Docker service is running
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+  become: yes
+
+- name: Create registry directory
+  file:
+    path: /opt/docker-registry
+    state: directory
+    mode: 0755
+
+- name: Install Docker registry in Docker container
+  docker_container:
+    name: registry
+    image: registry:2
+    state: started
+    restart_policy: unless-stopped
+    pull: yes
+    ports:
+    - "5000:5000"
+    volumes:
+    - /opt/docker-registry:/var/lib/registry
+
+- name: Install NGINX webserver in Docker container
+  docker_container:
+    name: webserver
+    image: nginx:latest
+    state: started
+    restart_policy: unless-stopped
+    pull: yes
+    ports:
+    - "80:80"
