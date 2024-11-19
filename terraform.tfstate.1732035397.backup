@@ -1,12 +1,12 @@
 {
   "version": 4,
   "terraform_version": "1.9.7",
-  "serial": 79,
+  "serial": 67,
   "lineage": "36bd2cbc-00e8-b825-aca5-2d749bb01ebc",
   "outputs": {
     "backend_ips": {
       "value": [
-        "147.228.173.174",
+        "147.228.173.173",
         "147.228.173.172"
       ],
       "type": [
@@ -18,7 +18,7 @@
       ]
     },
     "load_balancer_ip": {
-      "value": "147.228.173.173",
+      "value": "147.228.173.174",
       "type": "string"
     }
   },
@@ -42,7 +42,7 @@
             "gid": 1,
             "gname": "users",
             "group": null,
-            "id": "760",
+            "id": "759",
             "lock": null,
             "name": "Ubuntu Minimal 24.04",
             "path": "https://marketplace.opennebula.io//appliance/44077b30-f431-013c-b66a-7875a4a4f528/download/0",
@@ -98,7 +98,7 @@
                 "discard": "",
                 "disk_id": 0,
                 "driver": "",
-                "image_id": 760,
+                "image_id": 759,
                 "io": "",
                 "size": 12000,
                 "target": "vda",
@@ -113,15 +113,15 @@
                 "keymap": "en-us",
                 "listen": "0.0.0.0",
                 "passwd": "",
-                "port": "10440",
+                "port": "10430",
                 "random_passwd": false,
                 "type": "vnc"
               }
             ],
             "group": "users",
             "hard_shutdown": false,
-            "id": "4540",
-            "ip": "147.228.173.174",
+            "id": "4530",
+            "ip": "147.228.173.173",
             "keep_nic_order": null,
             "lcmstate": 3,
             "lock": null,
@@ -131,8 +131,8 @@
               {
                 "computed_dns": "147.228.3.3",
                 "computed_gateway": "147.228.173.1",
-                "computed_ip": "147.228.173.174",
-                "computed_mac": "52:54:00:17:30:ae",
+                "computed_ip": "147.228.173.173",
+                "computed_mac": "52:54:00:17:30:ad",
                 "computed_method": "",
                 "computed_model": "",
                 "computed_physical_device": "bond1",
@@ -217,7 +217,7 @@
                 "discard": "",
                 "disk_id": 0,
                 "driver": "",
-                "image_id": 760,
+                "image_id": 759,
                 "io": "",
                 "size": 12000,
                 "target": "vda",
@@ -232,14 +232,14 @@
                 "keymap": "en-us",
                 "listen": "0.0.0.0",
                 "passwd": "",
-                "port": "10438",
+                "port": "10429",
                 "random_passwd": false,
                 "type": "vnc"
               }
             ],
             "group": "users",
             "hard_shutdown": false,
-            "id": "4538",
+            "id": "4529",
             "ip": "147.228.173.172",
             "keep_nic_order": null,
             "lcmstate": 3,
@@ -343,7 +343,7 @@
                 "discard": "",
                 "disk_id": 0,
                 "driver": "",
-                "image_id": 760,
+                "image_id": 759,
                 "io": "",
                 "size": 12000,
                 "target": "vda",
@@ -356,8 +356,8 @@
             "graphics": [],
             "group": "users",
             "hard_shutdown": false,
-            "id": "4539",
-            "ip": "147.228.173.173",
+            "id": "4531",
+            "ip": "147.228.173.174",
             "keep_nic_order": null,
             "lcmstate": 3,
             "lock": null,
@@ -367,8 +367,8 @@
               {
                 "computed_dns": "147.228.3.3",
                 "computed_gateway": "147.228.173.1",
-                "computed_ip": "147.228.173.173",
-                "computed_mac": "52:54:00:17:30:ad",
+                "computed_ip": "147.228.173.174",
+                "computed_mac": "52:54:00:17:30:ae",
                 "computed_method": "",
                 "computed_model": "",
                 "computed_physical_device": "bond1",

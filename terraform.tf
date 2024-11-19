@@ -71,7 +71,6 @@ resource "opennebula_virtual_machine" "backend-node" {
       "export DEBIAN_FRONTEND=noninteractive", 
       "apt -y update",
       "apt -y upgrade",
-      "apt -y install mc"
      ]
   }
 
