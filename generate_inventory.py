@@ -5,15 +5,15 @@ file_path = 'inventory.json'
 # Check if the file exists and is not empty
 try:
     with open(file_path, 'r') as f:
-        # Skip the first line and load the rest as JSON
-        content = f.readlines()[1:]  # Read lines starting from the second line
-        content = ''.join(content)  # Join lines back into a single string
+        # Skip the first line and clean up extra whitespace
+        content = f.readlines()[1:]  # Read from the second line
+        content = ''.join(content).strip()  # Join and remove surrounding whitespace
 
         # Debug: Print the content being parsed
         print("Content being parsed as JSON:")
         print(content)
 
-        terraform_output = json.loads(content)
+        terraform_output = json.loads(content)  # Parse JSON
 except FileNotFoundError:
     print(f"Error: File {file_path} not found.")
     exit(1)
