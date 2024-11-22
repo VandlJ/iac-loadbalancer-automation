@@ -64,15 +64,11 @@ jobs:
       - name: Apply Terraform
         run: terraform apply -auto-approve
 
-      # Step 8: Generate inventory.json from Terraform output
-      - name: Generate inventory.json
-        run: terraform output -json > inventory.json
-
         # Step 10: Generate backend_ips.json
-      - name: Generate backend_ips.json and load_balancer_ip.json
-        run: |
-          terraform output -json backend_ips > backend_ips.json
-          terraform output -json load_balancer_ip > load_balancer_ip.json
+      #- name: Generate backend_ips.json and load_balancer_ip.json
+       # run: |
+        #  terraform output -json backend_ips > backend_ips.json
+         # terraform output -json load_balancer_ip > load_balancer_ip.json
 
       # Step 9: Generate Ansible inventory file
       - name: Generate Ansible inventory
