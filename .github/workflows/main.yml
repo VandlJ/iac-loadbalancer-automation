@@ -34,10 +34,6 @@ jobs:
           sudo apt update
           sudo apt install -y ansible jq
 
-      # Step 5: Initialize Terraform
-      - name: Initialize Terraform
-        run: terraform init
-
       - name: Write SSH Private Key
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -46,9 +42,7 @@ jobs:
           chmod 600 id_ecdsa
 
       - name: Verify SSH Private Key
-        run: |
-          head -n 1 id_ecdsa  # Prints the first line
-          tail -n 1 id_ecdsa  # Prints the last line
+        run: cat id_ecdsa
 
       - name: Write SSH Public Key
         env:
@@ -59,6 +53,10 @@ jobs:
 
       - name: Fix provider permissions
         run: chmod +x .terraform/providers/registry.terraform.io/opennebula/opennebula/1.4.1/linux_amd64/terraform-provider-opennebula_v1.4.1
+
+      # Step 5: Initialize Terraform
+      - name: Initialize Terraform
+        run: terraform init
 
       # Step 6: Plan Terraform deployment
       - name: Plan Terraform
