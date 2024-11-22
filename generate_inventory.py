@@ -1,30 +1,27 @@
 import json
-import os
 
-# Check if inventory.json exists and is not empty
 file_path = 'inventory.json'
-if not os.path.exists(file_path):
-    print("Error: inventory.json file does not exist.")
-    exit(1)
 
-if os.path.getsize(file_path) == 0:
-    print("Error: inventory.json file is empty.")
-    exit(1)
-
-# Debug: Print file content
-with open(file_path, 'r') as f:
-    content = f.read()
-    print("Content of inventory.json:")
-    print(content)
-
-# Parse JSON
+# Check if the file exists and is not empty
 try:
-    terraform_output = json.loads(content)
+    with open(file_path, 'r') as f:
+        # Skip the first line and load the rest as JSON
+        content = f.readlines()[1:]  # Read lines starting from the second line
+        content = ''.join(content)  # Join lines back into a single string
+
+        # Debug: Print the content being parsed
+        print("Content being parsed as JSON:")
+        print(content)
+
+        terraform_output = json.loads(content)
+except FileNotFoundError:
+    print(f"Error: File {file_path} not found.")
+    exit(1)
 except json.JSONDecodeError as e:
     print(f"Failed to decode JSON: {e}")
     exit(1)
 
-# Process Terraform output
+# Extract values from the JSON
 backend_ips = terraform_output["backend_ips"]["value"]
 lb_ip = terraform_output["load_balancer_ip"]["value"]
 
