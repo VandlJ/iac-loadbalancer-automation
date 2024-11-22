@@ -66,10 +66,11 @@ jobs:
 
       # Step 8: Generate inventory.json from Terraform output
       - name: Generate inventory.json
-        run: |
-          terraform output -json > inventory.json
-          cat inventory.json
+        run: terraform output -json > inventory.json
 
+      - name: Debug inventory.json
+        run: cat inventory.json
+    
       # Step 9: Generate Ansible inventory file
       - name: Generate Ansible inventory
         run: python3 generate_inventory.py
