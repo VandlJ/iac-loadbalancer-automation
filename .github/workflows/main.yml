@@ -38,6 +38,9 @@ jobs:
       - name: Initialize Terraform
         run: terraform init
 
+      - name: Fix provider permissions
+        run: chmod +x .terraform/providers/registry.terraform.io/opennebula/opennebula/1.4.1/linux_amd64/terraform-provider-opennebula_v1.4.1
+
       # Step 6: Plan Terraform deployment
       - name: Plan Terraform
         run: terraform plan
