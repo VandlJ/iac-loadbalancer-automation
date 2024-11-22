@@ -1,30 +1,69 @@
 {
   "version": 4,
   "terraform_version": "1.9.7",
-  "serial": 181,
+  "serial": 147,
   "lineage": "36bd2cbc-00e8-b825-aca5-2d749bb01ebc",
   "outputs": {
     "backend_ips": {
       "value": [
-        "147.228.173.142",
-        "147.228.173.133",
-        "147.228.173.132"
+        "147.228.173.166",
+        "147.228.173.164"
       ],
       "type": [
         "tuple",
         [
-          "string",
           "string",
           "string"
         ]
       ]
     },
     "load_balancer_ip": {
-      "value": "147.228.173.145",
+      "value": "147.228.173.168",
       "type": "string"
     }
   },
   "resources": [
+    {
+      "mode": "managed",
+      "type": "opennebula_image",
+      "name": "os-image",
+      "provider": "provider[\"registry.terraform.io/opennebula/opennebula\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "clone_from_image": null,
+            "datastore_id": 101,
+            "default_tags": {},
+            "description": null,
+            "dev_prefix": "sd",
+            "driver": null,
+            "format": null,
+            "gid": 1,
+            "gname": "users",
+            "group": null,
+            "id": "762",
+            "lock": null,
+            "name": "Ubuntu Minimal 24.04",
+            "path": "https://marketplace.opennebula.io//appliance/44077b30-f431-013c-b66a-7875a4a4f528/download/0",
+            "permissions": "600",
+            "persistent": false,
+            "size": null,
+            "tags": null,
+            "tags_all": {},
+            "target": null,
+            "template_section": [],
+            "timeout": 20,
+            "timeouts": null,
+            "type": null,
+            "uid": 486,
+            "uname": "vandl"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDB9fQ=="
+        }
+      ]
+    },
     {
       "mode": "managed",
       "type": "opennebula_virtual_machine",
@@ -38,7 +77,7 @@
             "context": {
               "HOSTNAME": "$NAME",
               "NETWORK": "YES",
-              "SSH_PUBLIC_KEY": "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2\n"
+              "SSH_PUBLIC_KEY": "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2"
             },
             "cpu": 1,
             "cpumodel": [],
@@ -59,7 +98,7 @@
                 "discard": "",
                 "disk_id": 0,
                 "driver": "",
-                "image_id": 687,
+                "image_id": 762,
                 "io": "",
                 "size": 12000,
                 "target": "vda",
@@ -74,15 +113,15 @@
                 "keymap": "en-us",
                 "listen": "0.0.0.0",
                 "passwd": "",
-                "port": "10518",
+                "port": "10474",
                 "random_passwd": false,
                 "type": "vnc"
               }
             ],
             "group": "users",
             "hard_shutdown": false,
-            "id": "4618",
-            "ip": "147.228.173.142",
+            "id": "4574",
+            "ip": "147.228.173.166",
             "keep_nic_order": null,
             "lcmstate": 3,
             "lock": null,
@@ -92,8 +131,8 @@
               {
                 "computed_dns": "147.228.3.3",
                 "computed_gateway": "147.228.173.1",
-                "computed_ip": "147.228.173.142",
-                "computed_mac": "52:54:00:17:30:8e",
+                "computed_ip": "147.228.173.166",
+                "computed_mac": "52:54:00:17:30:a6",
                 "computed_method": "",
                 "computed_model": "",
                 "computed_physical_device": "bond1",
@@ -145,7 +184,10 @@
             "vmgroup": null
           },
           "sensitive_attributes": [],
-          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19"
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "opennebula_image.os-image"
+          ]
         },
         {
           "index_key": 1,
@@ -154,7 +196,7 @@
             "context": {
               "HOSTNAME": "$NAME",
               "NETWORK": "YES",
-              "SSH_PUBLIC_KEY": "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2\n"
+              "SSH_PUBLIC_KEY": "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2"
             },
             "cpu": 1,
             "cpumodel": [],
@@ -175,7 +217,7 @@
                 "discard": "",
                 "disk_id": 0,
                 "driver": "",
-                "image_id": 687,
+                "image_id": 762,
                 "io": "",
                 "size": 12000,
                 "target": "vda",
@@ -190,15 +232,15 @@
                 "keymap": "en-us",
                 "listen": "0.0.0.0",
                 "passwd": "",
-                "port": "10517",
+                "port": "10473",
                 "random_passwd": false,
                 "type": "vnc"
               }
             ],
             "group": "users",
             "hard_shutdown": false,
-            "id": "4617",
-            "ip": "147.228.173.133",
+            "id": "4573",
+            "ip": "147.228.173.164",
             "keep_nic_order": null,
             "lcmstate": 3,
             "lock": null,
@@ -208,8 +250,8 @@
               {
                 "computed_dns": "147.228.3.3",
                 "computed_gateway": "147.228.173.1",
-                "computed_ip": "147.228.173.133",
-                "computed_mac": "52:54:00:17:30:85",
+                "computed_ip": "147.228.173.164",
+                "computed_mac": "52:54:00:17:30:a4",
                 "computed_method": "",
                 "computed_model": "",
                 "computed_physical_device": "bond1",
@@ -261,123 +303,10 @@
             "vmgroup": null
           },
           "sensitive_attributes": [],
-          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19"
-        },
-        {
-          "index_key": 2,
-          "schema_version": 0,
-          "attributes": {
-            "context": {
-              "HOSTNAME": "$NAME",
-              "NETWORK": "YES",
-              "SSH_PUBLIC_KEY": "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2\n"
-            },
-            "cpu": 1,
-            "cpumodel": [],
-            "default_tags": {},
-            "description": "Backend Node",
-            "disk": [
-              {
-                "cache": "",
-                "computed_cache": "",
-                "computed_dev_prefix": "sd",
-                "computed_discard": "",
-                "computed_driver": "raw",
-                "computed_io": "",
-                "computed_size": 12000,
-                "computed_target": "vda",
-                "computed_volatile_format": "raw",
-                "dev_prefix": "",
-                "discard": "",
-                "disk_id": 0,
-                "driver": "",
-                "image_id": 687,
-                "io": "",
-                "size": 12000,
-                "target": "vda",
-                "volatile_format": "",
-                "volatile_type": ""
-              }
-            ],
-            "gid": 1,
-            "gname": "users",
-            "graphics": [
-              {
-                "keymap": "en-us",
-                "listen": "0.0.0.0",
-                "passwd": "",
-                "port": "10516",
-                "random_passwd": false,
-                "type": "vnc"
-              }
-            ],
-            "group": "users",
-            "hard_shutdown": false,
-            "id": "4616",
-            "ip": "147.228.173.132",
-            "keep_nic_order": null,
-            "lcmstate": 3,
-            "lock": null,
-            "memory": 1024,
-            "name": "backend-3",
-            "nic": [
-              {
-                "computed_dns": "147.228.3.3",
-                "computed_gateway": "147.228.173.1",
-                "computed_ip": "147.228.173.132",
-                "computed_mac": "52:54:00:17:30:84",
-                "computed_method": "",
-                "computed_model": "",
-                "computed_physical_device": "bond1",
-                "computed_security_groups": [],
-                "computed_virtio_queues": "",
-                "dns": "",
-                "gateway": "",
-                "ip": "",
-                "mac": "",
-                "method": "",
-                "model": "",
-                "network": "vlan173",
-                "network_id": 3,
-                "network_mode_auto": false,
-                "nic_id": 0,
-                "physical_device": "",
-                "sched_rank": "",
-                "sched_requirements": "",
-                "security_groups": null,
-                "virtio_queues": ""
-              }
-            ],
-            "on_disk_change": "swap",
-            "os": [
-              {
-                "arch": "x86_64",
-                "boot": "disk0"
-              }
-            ],
-            "pending": false,
-            "permissions": "600",
-            "raw": [],
-            "sched_ds_requirements": "",
-            "sched_requirements": "",
-            "state": 3,
-            "tags": null,
-            "tags_all": {},
-            "template_disk": [],
-            "template_id": -1,
-            "template_nic": [],
-            "template_section": [],
-            "template_section_names": {},
-            "template_tags": {},
-            "timeout": 20,
-            "timeouts": null,
-            "uid": 486,
-            "uname": "vandl",
-            "vcpu": 1,
-            "vmgroup": null
-          },
-          "sensitive_attributes": [],
-          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19"
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "opennebula_image.os-image"
+          ]
         }
       ]
     },
@@ -393,7 +322,7 @@
             "context": {
               "HOSTNAME": "$NAME",
               "NETWORK": "YES",
-              "SSH_PUBLIC_KEY": "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2\n"
+              "SSH_PUBLIC_KEY": "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2"
             },
             "cpu": 1,
             "cpumodel": [],
@@ -414,7 +343,7 @@
                 "discard": "",
                 "disk_id": 0,
                 "driver": "",
-                "image_id": 687,
+                "image_id": 762,
                 "io": "",
                 "size": 12000,
                 "target": "vda",
@@ -427,8 +356,8 @@
             "graphics": [],
             "group": "users",
             "hard_shutdown": false,
-            "id": "4619",
-            "ip": "147.228.173.145",
+            "id": "4575",
+            "ip": "147.228.173.168",
             "keep_nic_order": null,
             "lcmstate": 3,
             "lock": null,
@@ -438,8 +367,8 @@
               {
                 "computed_dns": "147.228.3.3",
                 "computed_gateway": "147.228.173.1",
-                "computed_ip": "147.228.173.145",
-                "computed_mac": "52:54:00:17:30:91",
+                "computed_ip": "147.228.173.168",
+                "computed_mac": "52:54:00:17:30:a8",
                 "computed_method": "",
                 "computed_model": "",
                 "computed_physical_device": "bond1",
@@ -491,7 +420,10 @@
             "vmgroup": null
           },
           "sensitive_attributes": [],
-          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19"
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "opennebula_image.os-image"
+          ]
         }
       ]
     }

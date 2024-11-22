@@ -10,5 +10,8 @@ variable "opennebula_password"  {
 }
 variable "backend_count" {
   description = "Number of cluster nodes"
-  default = 3
+  default = 2
+}
+variable "ssh_public_key_path" {
+  default = "/var/iac-dev-container-data/id_ecdsa.pub"
 }

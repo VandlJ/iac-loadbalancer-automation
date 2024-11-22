@@ -14,13 +14,13 @@ provider "opennebula" {
 }
 
 # Image resource for all VMs
-resource "opennebula_image" "os-image" {
-  name        = "Ubuntu Minimal 24.04"
-  datastore_id = 101
-  persistent  = false
-  path        = "https://marketplace.opennebula.io//appliance/44077b30-f431-013c-b66a-7875a4a4f528/download/0"
-  permissions = "600"
-}
+#resource "opennebula_image" "os-image" {
+#  name        = "Ubuntu Minimal 24.04"
+#  datastore_id = 101
+#  persistent  = false
+#  path        = "https://marketplace.opennebula.io//appliance/44077b30-f431-013c-b66a-7875a4a4f528/download/0"
+#  permissions = "600"
+#}
 
 # Configurable backend nodes
 resource "opennebula_virtual_machine" "backend-node" {
@@ -36,7 +36,8 @@ resource "opennebula_virtual_machine" "backend-node" {
   context = {
     NETWORK  = "YES"
     HOSTNAME = "$NAME"
-    SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2"
+    # SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2"
+    SSH_PUBLIC_KEY = file(var.ssh_public_key_path)
   }
 
   os {
@@ -45,7 +46,7 @@ resource "opennebula_virtual_machine" "backend-node" {
   }
 
   disk {
-    image_id = opennebula_image.os-image.id
+    image_id = 687 # opennebula_image.os-image.id 
     target   = "vda"
     size     = 12000 
   }
@@ -94,7 +95,8 @@ resource "opennebula_virtual_machine" "load-balancer" {
   context = {
     NETWORK       = "YES"
     HOSTNAME      = "$NAME"
-    SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2"
+    # SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2"
+    SSH_PUBLIC_KEY = file(var.ssh_public_key_path)
   }
 
   os {
@@ -103,7 +105,7 @@ resource "opennebula_virtual_machine" "load-balancer" {
   }
 
   disk {
-    image_id = opennebula_image.os-image.id
+    image_id = 687 # opennebula_image.os-image.id 
     target   = "vda"
     size     = 12000
   }

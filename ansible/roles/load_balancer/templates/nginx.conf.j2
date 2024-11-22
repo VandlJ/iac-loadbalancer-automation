@@ -1,11 +1,13 @@
+
 events {
     worker_connections 1024;  # Number of simultaneous connections per worker
 }
 
 http {
     upstream backend {
-        server 147.228.173.166:80;
-        server 147.228.173.164:80;
+        server 147.228.173.142:80;
+        server 147.228.173.133:80;
+        server 147.228.173.132:80;
     }
 
     server {
