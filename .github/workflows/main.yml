@@ -40,9 +40,7 @@ jobs:
         run: |
           echo "$SSH_PRIVATE_KEY" > id_ecdsa
           chmod 600 id_ecdsa
-
-      - name: Verify SSH Private Key
-        run: cat id_ecdsa
+          cat id_ecdsa
 
       - name: Write SSH Public Key
         env:
