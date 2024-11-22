@@ -66,7 +66,7 @@ resource "opennebula_virtual_machine" "backend-node" {
     user = "root"
     host = "${self.ip}"
     # private_key = "${file("/var/iac-dev-container-data/id_ecdsa")}"
-    private_key = "${file("id_ecdsa")}"  # Change to a relative path
+    private_key = file("id_ecdsa")  # Change to a relative path
   }
 
   provisioner "remote-exec" {
@@ -122,7 +122,7 @@ resource "opennebula_virtual_machine" "load-balancer" {
     user        = "root"
     host        = "${self.ip}"
     # private_key = "${file("/var/iac-dev-container-data/id_ecdsa")}"
-    private_key = "${file("id_ecdsa")}"  # Change to a relative path
+    private_key = file("id_ecdsa")  # Change to a relative path
   }
 }
 
