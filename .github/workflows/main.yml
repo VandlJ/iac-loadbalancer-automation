@@ -38,6 +38,14 @@ jobs:
       - name: Initialize Terraform
         run: terraform init
 
+
+      - name: Write SSH Private Key
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          echo "$SSH_PRIVATE_KEY" > id_ecdsa
+          chmod 600 id_ecdsa
+
       - name: Fix provider permissions
         run: chmod +x .terraform/providers/registry.terraform.io/opennebula/opennebula/1.4.1/linux_amd64/terraform-provider-opennebula_v1.4.1
 
