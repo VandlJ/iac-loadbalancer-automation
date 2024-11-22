@@ -74,6 +74,8 @@ jobs:
         run: |
           cp backend.json backend_ips.json
           cp load_balancer.json load_balancer_ip.json
+          cat backend_ips.json
+          cat load_balancer_ip.json
 
       # Step 11: Wait for files to be written
       - name: Wait for JSON files to be written
