@@ -68,40 +68,15 @@ jobs:
       - name: Generate inventory.json
         run: terraform output -json > inventory.json
 
-      - name: Debug Working Directory
-        run: pwd
-
-      - name: Verify inventory.json
+        # Step 10: Generate backend_ips.json
+      - name: Generate backend_ips.json and load_balancer_ip.json
         run: |
-          if [ ! -f inventory.json ]; then
-            echo "inventory.json file does not exist!"
-            exit 1
-          fi
-          if [ ! -s inventory.json ]; then
-            echo "inventory.json file is empty!"
-            exit 1
-          fi
-          echo "inventory.json exists and is not empty."          
+          terraform output -json backend_ips > backend_ips.json
+          terraform output -json load_balancer_ip > load_balancer_ip.json
 
-      - name: Check inventory.json permissions
-        run: ls -l inventory.json
-
-      - name: Fix inventory.json permissions
-        run: chmod 644 inventory.json
-
-      - name: Wait for inventory.json
-        run: sleep 2
-
-      - name: Debug inventory.json
-        run: cat inventory.json
-    
       # Step 9: Generate Ansible inventory file
       - name: Generate Ansible inventory
         run: python3 generate_inventory.py
-
-      # Step 10: Generate backend_ips.json
-      - name: Generate backend_ips.json
-        run: terraform output -json backend_ips > backend_ips.json
 
       # Step 11: Generate nginx.conf
       - name: Generate nginx.conf
