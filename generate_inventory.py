@@ -1,36 +1,42 @@
+import yaml
+
 # Define file paths
-backend_ips_file = 'backend_ips.txt'
-load_balancer_ip_file = 'lb_ip.txt'
+backend_ips_file = 'backend_ips.yml'
+load_balancer_ip_file = 'lb_ip.yml'
 inventory_file = 'ansible/inventory.yml'
 
-# Read backend IPs from backend_ips.txt
+# Read backend IPs from backend_ips.yml
 try:
     with open(backend_ips_file, 'r') as f:
-        # Read the file content, remove extra spaces, commas, and square brackets
         content = f.read().strip()  # Read and strip the content
-        # Remove square brackets and split the IPs by commas
-        backend_ips = [ip.strip().strip('"') for ip in content.strip('[]').split(',') if ip.strip()]
+        # Load the IPs as a Python list
+        backend_ips = yaml.safe_load(content)
 except FileNotFoundError:
     print(f"Error: {backend_ips_file} not found.")
     exit(1)
-
-# Validate the content of backend_ips
-if not backend_ips:
-    print(f"Error: {backend_ips_file} does not contain any IPs.")
+except yaml.YAMLError as e:
+    print(f"Failed to decode YAML from {backend_ips_file}: {e}")
     exit(1)
 
-# Read load balancer IP from lb_ip.txt
+# Validate the content of backend_ips
+if not isinstance(backend_ips, list) or not all(isinstance(ip, str) for ip in backend_ips):
+    print(f"Error: {backend_ips_file} does not contain a valid list of IPs.")
+    exit(1)
+
+# Read load balancer IP from lb_ip.yml
 try:
     with open(load_balancer_ip_file, 'r') as f:
-        # Read the single IP address and strip any extra spaces or quotes
-        load_balancer_ip = f.read().strip().strip('"')
+        load_balancer_ip = yaml.safe_load(f.read().strip())  # Load the IP as a string
 except FileNotFoundError:
     print(f"Error: {load_balancer_ip_file} not found.")
     exit(1)
+except yaml.YAMLError as e:
+    print(f"Failed to decode YAML from {load_balancer_ip_file}: {e}")
+    exit(1)
 
 # Validate the load balancer IP
-if not load_balancer_ip:
-    print(f"Error: {load_balancer_ip_file} does not contain a valid IP.")
+if not isinstance(load_balancer_ip, str):
+    print(f"Error: {load_balancer_ip_file} does not contain a valid string IP.")
     exit(1)
 
 # Generate the inventory file
@@ -62,6 +68,6 @@ try:
 except FileNotFoundError:
     print(f"Error: {inventory_file} not found.")
 except Exception as e:
-    print(f"Error while reading {inventory_file}: {e}")    
+    print(f"Error while reading {inventory_file}: {e}")
 
 print(f"Ansible inventory file has been successfully generated at {inventory_file}.")
