@@ -7,7 +7,7 @@ output_file = 'ansible/inventory.yml'
 # Read and parse the inventory.json file
 try:
     with open(input_file, 'r') as f:
-        inventory_data = json.load(f)  # Parse JSON file
+        inventory_data = json.load(f)  # Parse the entire JSON file as a single object
 except FileNotFoundError:
     print(f"Error: {input_file} not found.")
     exit(1)
@@ -17,7 +17,6 @@ except json.JSONDecodeError as e:
 
 # Extract backend_ips and load_balancer_ip
 try:
-    # Extract the "value" fields only
     backend_ips = inventory_data.get("backend_ips", {}).get("value", [])
     load_balancer_ip = inventory_data.get("load_balancer_ip", {}).get("value", "")
 
