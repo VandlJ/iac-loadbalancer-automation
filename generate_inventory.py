@@ -7,7 +7,10 @@ output_file = 'ansible/inventory.yml'
 # Read and parse the inventory.json file
 try:
     with open(input_file, 'r') as f:
-        inventory_data = json.load(f)  # Parse JSON file
+        lines = f.readlines()
+        # Remove any trailing commas or extra whitespace from the file content
+        clean_content = "".join(line.rstrip(",\n") + "\n" for line in lines)
+        inventory_data = json.loads(clean_content)  # Parse JSON file
 except FileNotFoundError:
     print(f"Error: {input_file} not found.")
     exit(1)
