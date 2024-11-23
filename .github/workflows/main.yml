@@ -67,27 +67,20 @@ jobs:
       # Step 10: Generate backend_ips.json
       - name: Generate backend_ips.json and load_balancer_ip.json
         run: |
-          terraform output -json backend_ips | jq '.' > backend_ips.json
-          terraform output -json load_balancer_ip | jq '.' > load_balancer_ip.json
-
-      - name: Copy json files
-        run: |
-          cp backend.json backend_ips.json
-          cp load_balancer.json load_balancer_ip.json
-          cat backend_ips.json
-          cat load_balancer_ip.json
+          terraform output -json backend_ips > backend.json
+          terraform output -json load_balancer_ip > load_balancer.json
 
       # Step 11: Wait for files to be written
       - name: Wait for JSON files to be written
         run: sleep 5  # Sleep for 5 seconds to ensure files are ready
 
+              # Step 11: Generate nginx.conf
+      - name: Generate nginx.conf
+        run: python3 generate_nginx_conf.py
+        
       # Step 9: Generate Ansible inventory file
       - name: Generate Ansible inventory
         run: python3 generate_inventory.py
-
-      # Step 11: Generate nginx.conf
-      - name: Generate nginx.conf
-        run: python3 generate_nginx_conf.py
 
       # Step 12: Run Ansible playbook
       - name: Run Ansible Playbook

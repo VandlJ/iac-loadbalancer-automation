@@ -36,7 +36,7 @@ resource "opennebula_virtual_machine" "backend-node" {
   context = {
     NETWORK  = "YES"
     HOSTNAME = "$NAME"
-    # SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2"
+    #SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2"
     # SSH_PUBLIC_KEY = file(var.ssh_public_key_path)
     SSH_PUBLIC_KEY = "${file("id_ecdsa.pub")}"
   }
@@ -65,8 +65,8 @@ resource "opennebula_virtual_machine" "backend-node" {
     type = "ssh"
     user = "root"
     host = "${self.ip}"
-    # private_key = "${file("/var/iac-dev-container-data/id_ecdsa")}"
-    private_key = file("id_ecdsa")  # Change to a relative path
+    private_key = "${file("/var/iac-dev-container-data/id_ecdsa")}"
+    #private_key = file("id_ecdsa")  # Change to a relative path
   }
 
   provisioner "remote-exec" {
@@ -97,7 +97,7 @@ resource "opennebula_virtual_machine" "load-balancer" {
   context = {
     NETWORK       = "YES"
     HOSTNAME      = "$NAME"
-    # SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2"
+    #SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2"
     # SSH_PUBLIC_KEY = file(var.ssh_public_key_path)
     SSH_PUBLIC_KEY = "${file("id_ecdsa.pub")}"
   }
