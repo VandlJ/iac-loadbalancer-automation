@@ -71,6 +71,16 @@ jobs:
           terraform output -json load_balancer_ip > load_balancer_ip.json
           terraform output -json > terraform_output.json
 
+      # Run Terraform and capture outputs in environment variables
+      - name: Get backend_ips and load_balancer_ip from Terraform
+        run: |
+          BACKEND_IPS=$(terraform output -json backend_ips)
+          LB_IP=$(terraform output -json load_balancer_ip)
+          
+          # Export as environment variables for Python script
+          echo "BACKEND_IPS=$BACKEND_IPS" >> $GITHUB_ENV
+          echo "LB_IP=$LB_IP" >> $GITHUB_ENV        
+          
       # Step 11: Wait for files to be written
       - name: Wait for JSON files to be written
         run: sleep 5  # Sleep for 5 seconds to ensure files are ready

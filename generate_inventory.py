@@ -1,38 +1,33 @@
 import json
-import sys
+import os
 
-# Check if the correct number of arguments is provided
-if len(sys.argv) != 2:
-    print("Usage: python3 generate_inventory.py 'terraform output -json'")
-    exit(1)
-
-# Function to load JSON from a file or stdin
-def load_json_from_input():
+# Function to load JSON data from environment variables
+def load_json_from_env(variable_name):
+    data = os.getenv(variable_name)
+    if data is None:
+        print(f"Error: {variable_name} not found in environment variables.")
+        exit(1)
     try:
-        return json.loads(sys.argv[1])
+        return json.loads(data)
     except json.JSONDecodeError as e:
-        print(f"Failed to decode JSON from input: {e}")
+        print(f"Failed to decode JSON from {variable_name}: {e}")
         exit(1)
 
-# Load the Terraform output JSON
-terraform_output = load_json_from_input()
+# Read backend IPs and load balancer IP from environment variables
+print("Reading backend IPs...")
+backend_ips = load_json_from_env("BACKEND_IPS")
 
-# Extract backend IPs and load balancer IP
-try:
-    backend_ips = terraform_output["backend_ips"]["value"]
-    load_balancer_ip = terraform_output["load_balancer_ip"]["value"]
-except KeyError as e:
-    print(f"Error: Missing key in JSON input - {e}")
-    exit(1)
-
-# Validate the backend IPs (ensure it's a list of strings)
+# Validate the content of backend_ips
 if not isinstance(backend_ips, list) or not all(isinstance(ip, str) for ip in backend_ips):
-    print(f"Error: backend_ips does not contain a valid list of IPs.")
+    print(f"Error: BACKEND_IPS does not contain a valid list of IPs.")
     exit(1)
 
-# Validate the load balancer IP (ensure it's a string)
+print("Reading load balancer IP...")
+load_balancer_ip = load_json_from_env("LB_IP")
+
+# Validate the load balancer IP
 if not isinstance(load_balancer_ip, str):
-    print(f"Error: load_balancer_ip is not a valid string IP.")
+    print(f"Error: LB_IP is not a valid string IP.")
     exit(1)
 
 # Define the inventory file path
