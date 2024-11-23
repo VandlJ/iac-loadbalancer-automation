@@ -83,7 +83,7 @@ jobs:
           
       # Step 11: Wait for files to be written
       - name: Wait for JSON files to be written
-        run: sleep 5  # Sleep for 5 seconds to ensure files are ready
+        run: sleep 6  # Sleep for 6 seconds to ensure files are ready
 
       # Step 9: Generate Ansible inventory file
       - name: Generate Ansible inventory
