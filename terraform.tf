@@ -38,7 +38,8 @@ resource "opennebula_virtual_machine" "backend-node" {
     HOSTNAME = "$NAME"
     #SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2"
     # SSH_PUBLIC_KEY = file(var.ssh_public_key_path)
-    SSH_PUBLIC_KEY = "${file("id_ecdsa.pub")}"
+    #SSH_PUBLIC_KEY = "${file("id_ecdsa.pub")}"
+    SSH_PUBLIC_KEY = file("id_ecdsa.pub")
   }
 
   os {
@@ -99,7 +100,8 @@ resource "opennebula_virtual_machine" "load-balancer" {
     HOSTNAME      = "$NAME"
     #SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2"
     # SSH_PUBLIC_KEY = file(var.ssh_public_key_path)
-    SSH_PUBLIC_KEY = "${file("id_ecdsa.pub")}"
+    # SSH_PUBLIC_KEY = "${file("id_ecdsa.pub")}"
+    SSH_PUBLIC_KEY = file("id_ecdsa.pub")
   }
 
   os {
