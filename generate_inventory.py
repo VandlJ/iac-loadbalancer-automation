@@ -1,50 +1,50 @@
 import json
+import sys
 
-# Define file paths
-backend_ips_file = 'backend_ips.json'
-load_balancer_ip_file = 'load_balancer_ip.json'
-inventory_file = 'ansible/inventory.yml'
+# Check if the correct number of arguments is provided
+if len(sys.argv) != 2:
+    print("Usage: python3 generate_inventory.py 'terraform output -json'")
+    exit(1)
 
-# Read backend IPs
+# Function to load JSON from a file or stdin
+def load_json_from_input():
+    try:
+        return json.loads(sys.argv[1])
+    except json.JSONDecodeError as e:
+        print(f"Failed to decode JSON from input: {e}")
+        exit(1)
+
+# Load the Terraform output JSON
+terraform_output = load_json_from_input()
+
+# Extract backend IPs and load balancer IP
 try:
-    with open(backend_ips_file, 'r') as f:
-        backend_ips = json.loads(f.read())
-except FileNotFoundError:
-    print(f"Error: {backend_ips_file} not found.")
-    exit(1)
-except json.JSONDecodeError as e:
-    print(f"Failed to decode JSON from {backend_ips_file}: {e}")
+    backend_ips = terraform_output["backend_ips"]["value"]
+    load_balancer_ip = terraform_output["load_balancer_ip"]["value"]
+except KeyError as e:
+    print(f"Error: Missing key in JSON input - {e}")
     exit(1)
 
-# Validate the content of backend_ips
+# Validate the backend IPs (ensure it's a list of strings)
 if not isinstance(backend_ips, list) or not all(isinstance(ip, str) for ip in backend_ips):
-    print(f"Error: {backend_ips_file} does not contain a valid list of IPs.")
+    print(f"Error: backend_ips does not contain a valid list of IPs.")
     exit(1)
 
-# Read load balancer IP
-try:
-    with open(load_balancer_ip_file, 'r') as f:
-        load_balancer_ip = json.loads(f.read())
-except FileNotFoundError:
-    print(f"Error: {load_balancer_ip_file} not found.")
-    exit(1)
-except json.JSONDecodeError as e:
-    print(f"Failed to decode JSON from {load_balancer_ip_file}: {e}")
-    exit(1)
-
-# Validate the load balancer IP
+# Validate the load balancer IP (ensure it's a string)
 if not isinstance(load_balancer_ip, str):
-    print(f"Error: {load_balancer_ip_file} does not contain a valid string IP.")
+    print(f"Error: load_balancer_ip is not a valid string IP.")
     exit(1)
+
+# Define the inventory file path
+inventory_file = 'ansible/inventory.yml'
 
 # Generate the inventory file
 try:
     with open(inventory_file, 'w') as f:
         # Write all hosts
         f.write("---\nall:\n  hosts:\n")
-        for ip in backend_ips:
+        for ip in backend_ips + [load_balancer_ip]:
             f.write(f"    {ip}:\n")
-        f.write(f"    {load_balancer_ip}:\n")
         f.write("  vars:\n    ansible_user: root\n    ansible_ssh_private_key_file: /var/iac-dev-container-data/id_ecdsa\n")
         
         # Write backends

@@ -1,0 +1,23 @@
+{
+  "backend_ips": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "string",
+        "string",
+        "string"
+      ]
+    ],
+    "value": [
+      "147.228.173.132",
+      "147.228.173.133",
+      "147.228.173.145"
+    ]
+  },
+  "load_balancer_ip": {
+    "sensitive": false,
+    "type": "string",
+    "value": "147.228.173.142"
+  }
+}
