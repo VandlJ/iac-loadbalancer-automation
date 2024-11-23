@@ -74,13 +74,19 @@ jobs:
       - name: Wait for JSON files to be written
         run: sleep 5  # Sleep for 5 seconds to ensure files are ready
 
-              # Step 11: Generate nginx.conf
-      - name: Generate nginx.conf
-        run: python3 generate_nginx_conf.py
-
       # Step 9: Generate Ansible inventory file
       - name: Generate Ansible inventory
         run: python3 generate_inventory.py
+
+      - name: Check inventory.yml
+        run: cat /ansible/inventory.yml
+
+      # Step 11: Generate nginx.conf
+      - name: Generate nginx.conf
+        run: python3 generate_nginx_conf.py
+
+      - name: Check nginx.conf.j2
+        run: cat /ansible/roles/load_balancer/templates/nginx.conf.j2
 
       - name: Install jq
         run: sudo apt install -y jq
