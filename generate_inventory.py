@@ -9,8 +9,11 @@ inventory_file = 'ansible/inventory.yml'
 try:
     with open(backend_ips_file, 'r') as f:
         # Parse JSON and validate it as a list of strings
-        backend_ips = json.load(f)
-        if not isinstance(backend_ips, list) or not all(isinstance(ip, str) for ip in backend_ips):
+        backend_ips = f.file.read()
+        print(backend_ips)
+        backend_ips_content = json.loads(backend_ips)
+        #backend_ips = json.load(f)
+        if not isinstance(backend_ips_content, list) or not all(isinstance(ip, str) for ip in backend_ips_content):
             raise ValueError(f"{backend_ips_file} does not contain a valid list of IPs.")
 except FileNotFoundError:
     print(f"Error: {backend_ips_file} not found.")
@@ -23,8 +26,11 @@ except (json.JSONDecodeError, ValueError) as e:
 try:
     with open(load_balancer_ip_file, 'r') as f:
         # Parse JSON and validate it as a string
-        load_balancer_ip = json.load(f)
-        if not isinstance(load_balancer_ip, str):
+        load_balancer_ip = f.file.read()
+        print(backend_ips)
+        load_balancer_ip_content = json.loads(load_balancer_ip)
+        # load_balancer_ip = json.load(f)
+        if not isinstance(load_balancer_ip_content, str):
             raise ValueError(f"{load_balancer_ip_file} does not contain a valid IP address.")
 except FileNotFoundError:
     print(f"Error: {load_balancer_ip_file} not found.")
