@@ -78,10 +78,7 @@ jobs:
           terraform output -json > inventory.json
           
       - name: CHECK
-        run: |
-          cat lb_ip.json
-          cat backend_ips.json
-          cat inventory.json
+        run: cat inventory.json
 
       - name: REMOVE First line
         run: |
@@ -90,10 +87,7 @@ jobs:
           python3 remove_first_line.py inventory.json  
 
       - name: CHECK
-        run: |
-          cat lb_ip.json
-          cat backend_ips.json
-          cat inventory.json
+        run: cat inventory.json
           
       # Step 11: Wait for files to be written
       - name: Wait for TXT files to be written
