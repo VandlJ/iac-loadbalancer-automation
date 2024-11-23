@@ -8,7 +8,7 @@ inventory_file = 'ansible/inventory.yml'
 # Read backend IPs
 try:
     with open(backend_ips_file, 'r') as f:
-        backend_ips = json.load(f)
+        backend_ips = json.loads(f.read())
 except FileNotFoundError:
     print(f"Error: {backend_ips_file} not found.")
     exit(1)
@@ -24,7 +24,7 @@ if not isinstance(backend_ips, list) or not all(isinstance(ip, str) for ip in ba
 # Read load balancer IP
 try:
     with open(load_balancer_ip_file, 'r') as f:
-        load_balancer_ip = json.load(f)
+        load_balancer_ip = json.loads(f.read())
 except FileNotFoundError:
     print(f"Error: {load_balancer_ip_file} not found.")
     exit(1)
