@@ -28,11 +28,11 @@ jobs:
         with:
           python-version: 3.9
 
-      # Step 4: Install Ansible and jq
-      - name: Install Ansible and jq
+      # Step 4: Install Ansible
+      - name: Install Ansible
         run: |
           sudo apt update
-          sudo apt install -y ansible jq
+          sudo apt install -y ansible 
 
       - name: Write SSH Private Key
         env:
@@ -77,10 +77,13 @@ jobs:
               # Step 11: Generate nginx.conf
       - name: Generate nginx.conf
         run: python3 generate_nginx_conf.py
-        
+
       # Step 9: Generate Ansible inventory file
       - name: Generate Ansible inventory
         run: python3 generate_inventory.py
+
+      - name: Install jq
+        run: sudo apt install -y jq
 
       # Step 12: Run Ansible playbook
       - name: Run Ansible Playbook
