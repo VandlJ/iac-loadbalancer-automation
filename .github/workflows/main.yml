@@ -67,8 +67,8 @@ jobs:
       # Step 10: Generate backend_ips.json
       - name: Generate backend_ips.json and load_balancer_ip.json
         run: |
-          terraform output -json backend_ips | jq '.backend_ips.value' > backend_ips.json
-          terraform output -json load_balancer_ip | jq '.load_balancer_ip.value' > load_balancer_ip.json
+          terraform output -json backend_ips | jq '.' > backend_ips.json
+          terraform output -json load_balancer_ip | jq '.' > load_balancer_ip.json
 
       - name: Copy json files
         run: |
