@@ -1,21 +1,21 @@
 import sys
 
-def remove_first_line(file_name):
+def remove_first_and_last_lines(file_name):
     try:
         # Read the file's content
         with open(file_name, 'r') as file:
             lines = file.readlines()
         
-        # Ensure the file is not empty
-        if not lines:
-            print(f"Error: {file_name} is empty.")
+        # Ensure the file has enough lines to remove both the first and last
+        if len(lines) < 2:
+            print(f"Error: {file_name} does not have enough lines to remove.")
             return
         
-        # Write back all lines except the first
+        # Write back all lines except the first and last
         with open(file_name, 'w') as file:
-            file.writelines(lines[1:])
+            file.writelines(lines[1:-1])
         
-        print(f"First line removed successfully from {file_name}.")
+        print(f"First and last lines removed successfully from {file_name}.")
     except FileNotFoundError:
         print(f"Error: {file_name} not found.")
     except Exception as e:
@@ -24,7 +24,7 @@ def remove_first_line(file_name):
 # Main execution
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python3 remove_first_line.py <yml-file-name>")
+        print("Usage: python3 remove_first_and_last_lines.py <file-name>")
     else:
         file_name = sys.argv[1]
-        remove_first_line(file_name)
+        remove_first_and_last_lines(file_name)
