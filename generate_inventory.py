@@ -9,7 +9,7 @@ inventory_file = 'ansible/inventory.yml'
 try:
     with open(backend_ips_file, 'r') as f:
         # Parse JSON and validate it as a list of strings
-        backend_ips = f.file.read()
+        backend_ips = f.read()
         print(backend_ips)
         backend_ips_content = json.loads(backend_ips)
         #backend_ips = json.load(f)
@@ -26,7 +26,7 @@ except (json.JSONDecodeError, ValueError) as e:
 try:
     with open(load_balancer_ip_file, 'r') as f:
         # Parse JSON and validate it as a string
-        load_balancer_ip = f.file.read()
+        load_balancer_ip = f.read()
         print(backend_ips)
         load_balancer_ip_content = json.loads(load_balancer_ip)
         # load_balancer_ip = json.load(f)
