@@ -73,23 +73,23 @@ jobs:
       # Step 10: Generate backend_ips.json
       - name: Generate backend_ips.txt and lb.txt
         run: |
-          terraform output load_balancer_ip > lb_ip.yml
-          terraform output backend_ips > backend_ips.yml
+          terraform output load_balancer_ip > lb_ip.json
+          terraform output backend_ips > backend_ips.json
           
       - name: CHECK
         run: |
-          cat lb_ip.yml
-          cat backend_ips.yml
+          cat lb_ip.json
+          cat backend_ips.json
 
       - name: REMOVE First line
         run: |
-          python3 remove_first_line.py lb_ip.yml
-          python3 remove_first_line.py backend_ips.yml
+          python3 remove_first_line.py lb_ip.json
+          python3 remove_first_line.py backend_ips.json
 
       - name: CHECK
         run: |
-          cat lb_ip.yml
-          cat backend_ips.yml
+          cat lb_ip.json
+          cat backend_ips.json
           
       # Step 11: Wait for files to be written
       - name: Wait for TXT files to be written
