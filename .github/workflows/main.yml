@@ -67,8 +67,8 @@ jobs:
       # Step 10: Generate backend_ips.json
       - name: Generate backend_ips.json and load_balancer_ip.json
         run: |
-          terraform output -json backend_ips > backend.json
-          terraform output -json load_balancer_ip > load_balancer.json
+          terraform output -json backend_ips > backend_ips.json
+          terraform output -json load_balancer_ip > load_balancer_ip.json
 
       # Step 11: Wait for files to be written
       - name: Wait for JSON files to be written
