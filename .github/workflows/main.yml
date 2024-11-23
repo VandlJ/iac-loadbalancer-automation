@@ -67,8 +67,13 @@ jobs:
       # Step 10: Generate backend_ips.json
       - name: Generate backend_ips.txt and lb.txt
         run: |
-          terraform output load_balancer_ip > lb_ip.txt
-          terraform output backend_ips > backend_ips.txt            
+          terraform output load_balancer_ip > lb_ip.yml
+          terraform output backend_ips > backend_ips.yml
+          
+      - name: CHECK
+        run: |
+          cat lb_ip.yml
+          cat backend_ips.yml
           
       # Step 11: Wait for files to be written
       - name: Wait for TXT files to be written
