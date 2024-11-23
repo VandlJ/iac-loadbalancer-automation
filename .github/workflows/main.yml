@@ -28,6 +28,12 @@ jobs:
         with:
           python-version: 3.9
 
+      # Install Python dependencies
+      - name: Install Python and Dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install pyyaml
+
       # Step 4: Install Ansible
       - name: Install Ansible
         run: |
