@@ -8,11 +8,11 @@ inventory_file = 'ansible/inventory.yml'
 # Read backend IPs from backend_ips.json
 try:
     with open(backend_ips_file, 'r') as f:
-        # Parse JSON and validate it as a list of strings
+        # Read and clean up trailing commas
         backend_ips = f.read()
-        print(backend_ips)
-        backend_ips_content = json.loads(backend_ips)
-        #backend_ips = json.load(f)
+        backend_ips_cleaned = backend_ips.replace(",\n]", "\n]")  # Remove trailing commas in arrays
+        print("Cleaned backend_ips content:", backend_ips_cleaned)
+        backend_ips_content = json.loads(backend_ips_cleaned)  # Parse JSON
         if not isinstance(backend_ips_content, list) or not all(isinstance(ip, str) for ip in backend_ips_content):
             raise ValueError(f"{backend_ips_file} does not contain a valid list of IPs.")
 except FileNotFoundError:
