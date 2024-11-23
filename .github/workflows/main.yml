@@ -79,14 +79,14 @@ jobs:
         run: python3 generate_inventory.py
 
       - name: Check inventory.yml
-        run: cat /ansible/inventory.yml
+        run: cat ansible/inventory.yml
 
       # Step 11: Generate nginx.conf
       - name: Generate nginx.conf
         run: python3 generate_nginx_conf.py
 
       - name: Check nginx.conf.j2
-        run: cat /ansible/roles/load_balancer/templates/nginx.conf.j2
+        run: cat ansible/roles/load_balancer/templates/nginx.conf.j2
 
       - name: Install jq
         run: sudo apt install -y jq
