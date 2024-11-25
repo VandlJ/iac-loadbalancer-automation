@@ -36,7 +36,9 @@ jobs:
           python3 -m pip show docker
 
       - name: Display Python version and path
-        run: which python3
+        run: |
+          which python3
+          which docker
         
       # Step 4: Install Ansible
       - name: Install Ansible
