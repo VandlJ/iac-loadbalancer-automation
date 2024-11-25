@@ -47,18 +47,21 @@
     state: present
   become: yes
 
-- name: Install NGINX
-  apt:
-    name: nginx
-    state: present
-  become: yes
+ - name: Install Apache (or other backend app)
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
 
-- name: Ensure NGINX is running
-  systemd:
-    name: nginx
+- name: Ensure Apache is running
+  service:
+    name: apache2
     state: started
-    enabled: yes
-  become: yes
+
+- name: Restart NGINX to apply configuration
+  service:
+    name: nginx
+    state: restarted
 
 - name: Create a simple index.html file
   copy:
