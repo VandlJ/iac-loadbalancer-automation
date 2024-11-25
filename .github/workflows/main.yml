@@ -32,6 +32,8 @@ jobs:
       - name: Install Python and Dependencies
         run: |
           python3 -m pip install --upgrade pip
+          python3 -m pip install docker==4.4.4
+          python3 -m pip show docker
 
       # Step 4: Install Ansible
       - name: Install Ansible
