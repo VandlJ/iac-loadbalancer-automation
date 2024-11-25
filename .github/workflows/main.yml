@@ -68,4 +68,4 @@ jobs:
 
       # Step 12: Run Ansible playbook
       - name: Run Ansible Playbook
-        run: ansible-playbook -i ansible/inventory ansible/playbook.yml -e "backend_ips=$(terraform output -json backend_ips)"
+        run: ansible-playbook -i ansible/inventory ansible/playbook.yml -vvvv
