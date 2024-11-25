@@ -44,6 +44,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
+          mkdir -p /var/iac-dev-container-data  # Vytvoření adresáře, pokud neexistuje
           echo "$SSH_PRIVATE_KEY" > /var/iac-dev-container-data/id_ecdsa
           chmod 600 /var/iac-dev-container-data/id_ecdsa
 
