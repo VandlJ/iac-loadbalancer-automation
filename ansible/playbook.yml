@@ -1,11 +1,11 @@
 - name: Configure Backends
-  hosts: backends
+  hosts: backend
   become: true
   roles:
     - backend
 
 - name: Configure Load Balancer
-  hosts: load_balancer
+  hosts: load-balancer
   become: true
   roles:
     - load_balancer

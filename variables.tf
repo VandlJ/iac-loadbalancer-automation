@@ -15,3 +15,8 @@ variable "backend_count" {
 variable "ssh_public_key_path" {
   default = "/var/iac-dev-container-data/id_ecdsa.pub"
 }
+variable "vm_admin_user" {
+  description = "Ansible user for SSH connections"
+  type        = string
+  default     = "root"
+}

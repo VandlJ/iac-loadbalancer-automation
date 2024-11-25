@@ -13,15 +13,6 @@ provider "opennebula" {
   password      = "${var.opennebula_password}"
 }
 
-# Image resource for all VMs
-#resource "opennebula_image" "os-image" {
-#  name        = "Ubuntu Minimal 24.04"
-#  datastore_id = 101
-#  persistent  = false
-#  path        = "https://marketplace.opennebula.io//appliance/44077b30-f431-013c-b66a-7875a4a4f528/download/0"
-#  permissions = "600"
-#}
-
 # Configurable backend nodes
 resource "opennebula_virtual_machine" "backend-node" {
   count        = var.backend_count
@@ -36,8 +27,8 @@ resource "opennebula_virtual_machine" "backend-node" {
   context = {
     NETWORK  = "YES"
     HOSTNAME = "$NAME"
-    SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2"
-    #SSH_PUBLIC_KEY = file("id_ecdsa.pub")
+    #SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2"
+    SSH_PUBLIC_KEY = file("id_ecdsa.pub")
   }
 
   os {
@@ -64,8 +55,8 @@ resource "opennebula_virtual_machine" "backend-node" {
     type = "ssh"
     user = "root"
     host = "${self.ip}"
-    private_key = "${file("/var/iac-dev-container-data/id_ecdsa")}"
-    #private_key = file("id_ecdsa")  # Change to a relative path
+    #private_key = "${file("/var/iac-dev-container-data/id_ecdsa")}"
+    private_key = file("id_ecdsa")  # Change to a relative path
   }
 
   provisioner "remote-exec" {
@@ -96,8 +87,8 @@ resource "opennebula_virtual_machine" "load-balancer" {
   context = {
     NETWORK       = "YES"
     HOSTNAME      = "$NAME"
-    SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2"
-    #SSH_PUBLIC_KEY = file("id_ecdsa.pub")
+    #SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2"
+    SSH_PUBLIC_KEY = file("id_ecdsa.pub")
   }
 
   os {
@@ -119,8 +110,8 @@ resource "opennebula_virtual_machine" "load-balancer" {
     type        = "ssh"
     user        = "root"
     host        = "${self.ip}"
-    private_key = "${file("/var/iac-dev-container-data/id_ecdsa")}"
-    #private_key = file("id_ecdsa")  # Change to a relative path
+    #private_key = "${file("/var/iac-dev-container-data/id_ecdsa")}"
+    private_key = file("id_ecdsa")  # Change to a relative path
   }
 }
 
@@ -133,4 +124,14 @@ output "backend_ips" {
 output "load_balancer_ip" {
   description = "IP address of the load balancer"
   value       = opennebula_virtual_machine.load-balancer.ip
+}
+
+resource "local_file" "ansible_inventory" {
+  content = templatefile("inventory.tmpl",
+    {
+      vm_admin_user = var.vm_admin_user,
+      load_balancer = [opennebula_virtual_machine.load-balancer.ip],
+      backend_nodes = opennebula_virtual_machine.backend-node.*.ip
+    })
+  filename = "./dynamic_inventories/inventory"
 }

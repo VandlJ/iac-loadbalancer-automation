@@ -5,3 +5,5 @@ opennebula_endpoint = "https://nuada.zcu.cz/RPC2"
 backend_count = 3
 
 ssh_public_key_path = "/var/iac-dev-container-data/id_ecdsa.pub"
+
+vm_admin_user = "root"

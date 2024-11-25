@@ -1,0 +1,10 @@
+[load-balancer]
+147.228.173.168
+
+[backend]
+147.228.173.185
+147.228.173.178
+147.228.173.184
+
+[all:vars]
+ansible_user=root
