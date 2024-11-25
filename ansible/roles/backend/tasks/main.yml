@@ -47,11 +47,11 @@
     state: present
   become: yes
 
- - name: Install Apache (or other backend app)
-      apt:
-        name: apache2
-        state: present
-        update_cache: yes
+  - name: Install Apache (or other backend app)
+    apt:
+      name: apache2
+      state: present
+      update_cache: yes
 
 - name: Ensure Apache is running
   service:
