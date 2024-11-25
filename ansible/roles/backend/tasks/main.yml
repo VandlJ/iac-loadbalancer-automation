@@ -15,6 +15,26 @@
     enabled: yes
   become: yes
 
+- name: Check Python version
+  command: python3 --version
+  register: python_version
+  changed_when: false
+  failed_when: false
+
+- name: Debug Python version
+  debug:
+    var: python_version.stdout
+
+- name: Check Docker version
+  command: docker --version
+  register: docker_version
+  changed_when: false
+  failed_when: false
+
+- name: Debug Docker version
+  debug:
+    var: docker_version.stdout
+
 - name: Create a simple index.html file
   copy:
     dest: /tmp/index.html
