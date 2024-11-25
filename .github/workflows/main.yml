@@ -32,7 +32,6 @@ jobs:
       - name: Install Python and Dependencies
         run: |
           python3 -m pip install --upgrade pip
-          python3 -m pip install pyyaml
 
       # Step 4: Install Ansible
       - name: Install Ansible
@@ -71,31 +70,9 @@ jobs:
         run: terraform apply -auto-approve
 
       # Step 10: Generate backend_ips.json
-      - name: Generate backend_ips.txt and lb.txt
+      - name: Generate backend_ips.json
         run: |
-          terraform output load_balancer_ip > lb_ip.json
           terraform output backend_ips > backend_ips.json
-          terraform output -json > inventory.json
-          
-      - name: CHECK
-        run: cat inventory.json
-
-      - name: REMOVE First line
-        run: |
-          python3 remove_first_line.py lb_ip.json
-          python3 remove_first_line.py backend_ips.json
-          python3 remove_first_line.py inventory.json  
-
-      - name: CHECK
-        run: cat inventory.json
-          
-      # Step 11: Wait for files to be written
-      - name: Wait for TXT files to be written
-        run: sleep 6  # Sleep for 6 seconds to ensure files are ready
-
-      # Step 9: Generate Ansible inventory file
-      - name: Generate Ansible inventory
-        run: python3 generate_inventory.py 
      
       - name: Check inventory.yml
         run: cat ansible/inventory.yml
@@ -112,4 +89,4 @@ jobs:
 
       # Step 12: Run Ansible playbook
       - name: Run Ansible Playbook
-        run: ansible-playbook -i ansible/inventory.yml ansible/playbook.yml -e "backend_ips=$(terraform output -json backend_ips)"
+        run: ansible-playbook -i dynamic_inventories/inventory ansible/playbook.yml -e "backend_ips=$(terraform output -json backend_ips)"
