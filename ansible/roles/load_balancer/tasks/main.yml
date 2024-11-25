@@ -1,6 +1,6 @@
 - name: Update apt cache
-  apt:
-    update_cache: yes
+  ansible.builtin.apt:
+    update_cache: true
 
 - name: Install apt-utils
   apt:
@@ -8,11 +8,10 @@
     state: present
     update_cache: yes
 
-- name: Install NGINX
-  apt:
+- name: Install Nginx Web Server
+  ansible.builtin.apt:
     name: nginx
     state: present
-    update_cache: yes
 
 - name: Copy NGINX configuration
   template:
