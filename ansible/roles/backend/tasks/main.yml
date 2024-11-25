@@ -2,22 +2,22 @@
   apt:
     update_cache: yes
 
-- name: Install Docker
+- name: Install Apache
   apt:
-    name: docker.io
+    name: apache2
     state: present
   become: yes
 
-- name: Ensure Docker service is running
+- name: Ensure Apache service is running
   systemd:
-    name: docker
+    name: apache2
     state: started
     enabled: yes
   become: yes
 
 - name: Create a simple index.html file
   copy:
-    dest: /tmp/index.html
+    dest: /var/www/html/index.html
     content: |
       <html>
       <head><title>Backend</title></head>
@@ -25,15 +25,3 @@
       <h1>This is Backend Server {{ ansible_host }}</h1>
       </body>
       </html>
-
-- name: Run NGINX in Docker
-  docker_container:
-    name: backend-nginx
-    image: nginx:latest
-    state: started
-    restart_policy: unless-stopped
-    pull: yes
-    ports:
-      - "80:80"
-    volumes:
-      - /tmp/index.html:/usr/share/nginx/html/index.html

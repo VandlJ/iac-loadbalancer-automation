@@ -15,29 +15,28 @@
     enabled: yes
   become: yes
 
-- name: Create a directory for NGINX config
+- name: Create a directory for Apache config
   file:
-    path: /tmp/nginx
+    path: /tmp/apache
     state: directory
 
-- name: Generate NGINX configuration
+- name: Generate Apache Load Balancer configuration
   template:
-    src: nginx.conf.j2
-    dest: /tmp/nginx/nginx.conf
+    src: apache
+    dest: /tmp/apache/apache.conf
 
-- name: Install NGINX webserver in Docker container as Load Balancer
+- name: Install Apache webserver in Docker container as Load Balancer
   docker_container:
-    name: webserver
-    image: nginx:latest
+    name: apache_load_balancer
+    image: httpd:latest
     state: started
     restart_policy: unless-stopped
     pull: yes
     ports:
-    - "80:80"
+      - "80:80"
     volumes:
-    - /tmp/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /tmp/apache/apache.conf:/usr/local/apache2/conf/httpd.conf
 
 - name: Debug backend IPs
   debug:
     var: backend_ips
-

@@ -148,10 +148,10 @@ resource "local_file" "ansible_inventory" {
   filename = "ansible/inventory"
 }
 
-resource "local_file" "nginx_config" {
-  content = templatefile("nginx.conf.tmpl",
-    {
-      backend_nodes = opennebula_virtual_machine.backend-node.*.ip
-    })
-  filename = "ansible/roles/load_balancer/templates/nginx.conf.j2"
+resource "local_file" "apache_config" {
+  content = templatefile("apache.conf.tmpl", 
+  {
+    backend_nodes = opennebula_virtual_machine.backend-node.*.ip
+  })
+  filename = "ansible/roles/load_balancer/templates/apache"
 }
