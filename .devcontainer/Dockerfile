@@ -34,7 +34,7 @@ RUN set -uex; \
 RUN npm install --global cdktf-cli@latest
 
 # Install Git, Python toolset, Ansible and Docker libraries
-RUN apt-get -y install git 
+RUN apt-get -y install git
 
 RUN apt -y install \
     python3-dev \
@@ -46,11 +46,6 @@ RUN pip install docker
 
 RUN pip install ansible
 RUN ansible-galaxy collection install community.docker
-
-# Install NGINX
-RUN apt-get update && \
-    apt-get -y install nginx && \
-    rm -rf /var/lib/apt/lists/*
 
 COPY init-iac-dev.sh /etc
 

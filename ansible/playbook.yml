@@ -1,15 +1,11 @@
 - name: Configure Backends
-  hosts: backend
+  hosts: backends
   become: true
-  vars:
-    ansible_python_interpreter: /usr/bin/python3  # Změňte na správnou cestu k Pythonu
   roles:
     - backend
 
 - name: Configure Load Balancer
   hosts: load_balancer
   become: true
-  vars:
-    ansible_python_interpreter: /usr/bin/python3  # Změňte na správnou cestu k Pythonu
   roles:
     - load_balancer

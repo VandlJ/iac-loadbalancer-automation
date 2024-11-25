@@ -1,10 +1,9 @@
-[load-balancer]
-147.228.173.178
+[load_balancer]
+147.228.173.142
 
-[backend]
-147.228.173.184
-147.228.173.185
-147.228.173.168
+[backends]
+147.228.173.145
 
 [all:vars]
 ansible_user=root
+ansible_ssh_private_key_file=/var/iac-dev-container-data/id_ecdsa

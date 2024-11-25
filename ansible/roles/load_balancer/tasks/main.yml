@@ -1,14 +1,31 @@
 - name: Update apt cache
-  ansible.builtin.apt:
-    update_cache: true
-
-- name: Install apt-utils
   apt:
-    name: apt-utils
-    state: present
     update_cache: yes
 
-- name: Install Nginx Web Server in Docker container
+- name: Install Docker
+  apt:
+    name: docker.io
+    state: present
+  become: yes
+
+- name: Ensure Docker service is running
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+  become: yes
+
+- name: Create a directory for NGINX config
+  file:
+    path: /tmp/nginx
+    state: directory
+
+- name: Generate NGINX configuration
+  template:
+    src: nginx.conf.j2
+    dest: /tmp/nginx/nginx.conf
+
+- name: Install NGINX webserver in Docker container as Load Balancer
   docker_container:
     name: webserver
     image: nginx:latest
@@ -17,25 +34,10 @@
     pull: yes
     ports:
     - "80:80"
+    volumes:
+    - /tmp/nginx/nginx.conf:/etc/nginx/nginx.conf
 
-- name: Copy NGINX configuration
-  template:
-    src: nginx.conf.j2
-    dest: /etc/nginx/nginx.conf
-    mode: 0644
+- name: Debug backend IPs
+  debug:
+    var: backend_ips
 
-- name: Validate NGINX configuration
-  command: nginx -t
-  register: nginx_test
-  ignore_errors: yes
-
-- name: Fail if NGINX configuration is invalid
-  fail:
-    msg: "NGINX configuration is invalid"
-  when: nginx_test.rc != 0
-
-- name: Ensure NGINX is enabled and started
-  service:
-    name: nginx
-    state: started
-    enabled: yes

@@ -4,7 +4,7 @@
 provider "registry.terraform.io/hashicorp/local" {
   version = "2.5.2"
   hashes = [
-    "h1:6XyefmvbkprppmYbGmMcQW5NB4w6C363SSShzuhF4R0=",
+    "h1:JlMZD6nYqJ8sSrFfEAH0Vk/SL8WLZRmFaMUF9PJK5wM=",
     "zh:136299545178ce281c56f36965bf91c35407c11897f7082b3b983d86cb79b511",
     "zh:3b4486858aa9cb8163378722b642c57c529b6c64bfbfc9461d940a84cd66ebea",
     "zh:4855ee628ead847741aa4f4fc9bed50cfdbf197f2912775dd9fe7bc43fa077c0",
@@ -24,6 +24,7 @@ provider "registry.terraform.io/opennebula/opennebula" {
   version     = "1.4.1"
   constraints = "~> 1.2"
   hashes = [
+    "h1:rA0zOeBGzJl1hVgZ6zrs7FXTpFJsNTqNBQ4cu2qNFIs=",
     "h1:u6/WtZRFmnm9nco4RWrOa93vojtpTEFymYOWiqn4Yc0=",
     "zh:1263edefe31b9c5f0842623f45d3b37253e554182e63aff20f84ba482f2c88cd",
     "zh:1fa5f67d82b86fa6867f352d5f15f3981662e98b4598f3ed9a1e20e60143cc4a",
