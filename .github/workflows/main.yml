@@ -49,9 +49,6 @@ jobs:
 
       - name: Check if SSH private key exists
         run: ls -l id_ecdsa
-
-      - name: Check if SSH private key exists
-        run: ls -l /var/iac-dev-container-data/id_ecdsa
         
       - name: Write SSH Public Key
         env:
