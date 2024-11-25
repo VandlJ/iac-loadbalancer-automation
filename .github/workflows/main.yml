@@ -48,7 +48,7 @@ jobs:
           chmod 600 id_ecdsa
 
       - name: Check if SSH private key exists
-        run: ls -l /var/iac-dev-container-data/id_ecdsa
+        run: ls -l id_ecdsa
 
       - name: Check if SSH private key exists
         run: ls -l /var/iac-dev-container-data/id_ecdsa
