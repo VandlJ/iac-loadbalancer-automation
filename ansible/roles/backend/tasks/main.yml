@@ -41,6 +41,19 @@
   debug:
     var: docker_version.stdout
 
+- name: Install NGINX
+  apt:
+    name: nginx
+    state: present
+  become: yes
+
+- name: Ensure NGINX is running
+  systemd:
+    name: nginx
+    state: started
+    enabled: yes
+  become: yes
+
 - name: Create a simple index.html file
   copy:
     dest: /tmp/index.html
@@ -51,6 +64,12 @@
       <h1>This is Backend Server {{ ansible_host }}</h1>
       </body>
       </html>
+
+- name: Reload NGINX to apply new configuration
+  systemd:
+    name: nginx
+    state: reloaded
+  become: yes
 
 #- name: Run NGINX in Docker
 #  docker_container:
