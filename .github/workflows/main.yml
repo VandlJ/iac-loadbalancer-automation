@@ -6,7 +6,7 @@ on:
 
 jobs:
   push_to_registries:
-    name: Push Docker image to the ghcr.io registry
+    name: Run load balancer
     runs-on: ubuntu-20.04
     permissions:
         contents: read
@@ -76,4 +76,4 @@ jobs:
 
       # Step 12: Run Ansible playbook
       - name: Run Ansible Playbook
-        run: ansible-playbook -i ansible/inventory ansible/playbook.yml -vvvv
+        run: ansible-playbook -i ansible/inventory ansible/playbook.yml -e "backend_ips=$(terraform output -json backend_ips)"
