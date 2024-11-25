@@ -8,10 +8,15 @@
     state: present
     update_cache: yes
 
-- name: Install Nginx Web Server
-  ansible.builtin.apt:
-    name: nginx
-    state: present
+- name: Install Nginx Web Server in Docker container
+  docker_container:
+    name: webserver
+    image: nginx:latest
+    state: started
+    restart_policy: unless-stopped
+    pull: yes
+    ports:
+    - "80:80"
 
 - name: Copy NGINX configuration
   template:
