@@ -58,28 +58,6 @@
     name: apache2
     state: started
 
-- name: Restart NGINX to apply configuration
-  service:
-    name: nginx
-    state: restarted
-
-- name: Create a simple index.html file
-  copy:
-    dest: /tmp/index.html
-    content: |
-      <html>
-      <head><title>Backend</title></head>
-      <body>
-      <h1>This is Backend Server {{ ansible_host }}</h1>
-      </body>
-      </html>
-
-- name: Reload NGINX to apply new configuration
-  systemd:
-    name: nginx
-    state: reloaded
-  become: yes
-
 #- name: Run NGINX in Docker
 #  docker_container:
 #    name: backend-nginx

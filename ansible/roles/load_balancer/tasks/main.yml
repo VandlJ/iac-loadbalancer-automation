@@ -2,19 +2,6 @@
   apt:
     update_cache: yes
 
-- name: Install Docker
-  apt:
-    name: docker.io
-    state: present
-  become: yes
-
-- name: Ensure Docker service is running
-  systemd:
-    name: docker
-    state: started
-    enabled: yes
-  become: yes
-
 - name: Install NGINX
   apt:
     name: nginx
