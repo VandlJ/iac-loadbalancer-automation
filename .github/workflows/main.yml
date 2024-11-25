@@ -38,6 +38,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y ansible 
+          sudo apt install -y jq
 
       - name: Write SSH Private Key
         env:
@@ -45,7 +46,6 @@ jobs:
         run: |
           echo "$SSH_PRIVATE_KEY" > id_ecdsa
           chmod 600 id_ecdsa
-          cat id_ecdsa
 
       - name: Write SSH Public Key
         env:
@@ -54,8 +54,6 @@ jobs:
           echo "$SSH_PUBLIC_KEY" > id_ecdsa.pub
           chmod 600 id_ecdsa.pub        
 
-      - name: Fix provider permissions
-        run: chmod +x .terraform/providers/registry.terraform.io/opennebula/opennebula/1.4.1/linux_amd64/terraform-provider-opennebula_v1.4.1
 
       # Step 5: Initialize Terraform
       - name: Initialize Terraform
@@ -71,21 +69,7 @@ jobs:
 
       # Step 10: Generate backend_ips.json
       - name: Generate backend_ips.json
-        run: |
-          terraform output backend_ips > backend_ips.json
-     
-      - name: Check inventory.yml
-        run: cat ansible/inventory.yml
-
-      # Step 11: Generate nginx.conf
-      - name: Generate nginx.conf
-        run: python3 generate_nginx_conf.py
-
-      - name: Check nginx.conf.j2
-        run: cat ansible/roles/load_balancer/templates/nginx.conf.j2
-
-      - name: Install jq
-        run: sudo apt install -y jq
+        run: terraform output backend_ips > backend_ips.json
 
       # Step 12: Run Ansible playbook
       - name: Run Ansible Playbook

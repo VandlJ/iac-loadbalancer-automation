@@ -133,5 +133,13 @@ resource "local_file" "ansible_inventory" {
       load_balancer = [opennebula_virtual_machine.load-balancer.ip],
       backend_nodes = opennebula_virtual_machine.backend-node.*.ip
     })
-  filename = "./dynamic_inventories/inventory"
+  filename = "ansible/inventory"
+}
+
+resource "local_file" "nginx_config" {
+  content = templatefile("nginx.conf.tmpl",
+    {
+      backend_nodes = opennebula_virtual_machine.backend-node.*.ip
+    })
+  filename = "ansible/roles/load_balancer/templates/nginx.conf.j2"
 }
