@@ -41,6 +41,12 @@
   debug:
     var: docker_version.stdout
 
+- name: Install apt-utils
+  apt:
+    name: apt-utils
+    state: present
+  become: yes
+
 - name: Install NGINX
   apt:
     name: nginx
