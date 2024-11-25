@@ -2,6 +2,18 @@
   apt:
     update_cache: yes
 
+- name: Install apt-utils
+  apt:
+    name: apt-utils
+    state: present
+    update_cache: yes
+
+- name: Copy NGINX configuration
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    mode: 0644
+
 - name: Install NGINX
   apt:
     name: nginx
@@ -14,7 +26,18 @@
     dest: /etc/nginx/nginx.conf
     mode: 0644
 
-- name: Restart NGINX to apply configuration
+- name: Validate NGINX configuration
+  command: nginx -t
+  register: nginx_test
+  ignore_errors: yes
+
+- name: Fail if NGINX configuration is invalid
+  fail:
+    msg: "NGINX configuration is invalid"
+  when: nginx_test.rc != 0
+
+- name: Ensure NGINX is enabled and started
   service:
     name: nginx
-    state: restarted
+    state: started
+    enabled: yes

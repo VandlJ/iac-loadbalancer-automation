@@ -2,45 +2,6 @@
   apt:
     update_cache: yes
 
-- name: Install Docker
-  apt:
-    name: docker.io
-    state: present
-  become: yes
-
-- name: Ensure Docker service is running
-  systemd:
-    name: docker
-    state: started
-    enabled: yes
-  become: yes
-
-- name: Install pip3
-  apt:
-    name: python3-pip
-    state: present
-  become: yes
-
-- name: Check Python version
-  command: python3 --version
-  register: python_version
-  changed_when: false
-  failed_when: false
-
-- name: Debug Python version
-  debug:
-    var: python_version.stdout
-
-- name: Check Docker version
-  command: docker --version
-  register: docker_version
-  changed_when: false
-  failed_when: false
-
-- name: Debug Docker version
-  debug:
-    var: docker_version.stdout
-
 - name: Install apt-utils
   apt:
     name: apt-utils
