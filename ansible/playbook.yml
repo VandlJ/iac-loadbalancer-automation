@@ -7,7 +7,7 @@
     - backend
 
 - name: Configure Load Balancer
-  hosts: load-balancer
+  hosts: load_balancer
   become: true
   vars:
     ansible_python_interpreter: /usr/bin/python3  # Změňte na správnou cestu k Pythonu

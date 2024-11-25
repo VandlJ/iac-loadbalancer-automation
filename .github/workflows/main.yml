@@ -32,9 +32,8 @@ jobs:
       - name: Install Python and Dependencies
         run: |
           python3 -m pip install --upgrade pip
-          python3 -m pip install docker==4.4.4
+          python3 -m pip install docker>=5.0.0
           python3 -m pip show docker
-          pip3 install docker
 
       - name: Display Python version and path
         run: which python3
