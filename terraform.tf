@@ -131,7 +131,8 @@ resource "local_file" "ansible_inventory" {
     {
       vm_admin_user = var.vm_admin_user,
       load_balancer = [opennebula_virtual_machine.load-balancer.ip],
-      backend_nodes = opennebula_virtual_machine.backend-node.*.ip
+      backend_nodes = opennebula_virtual_machine.backend-node.*.ip,
+      ssh_key = var.ssh_key
     })
   filename = "ansible/inventory"
 }

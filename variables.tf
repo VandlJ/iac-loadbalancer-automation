@@ -20,3 +20,8 @@ variable "vm_admin_user" {
   type        = string
   default     = "root"
 }
+variable "ssh_key" {
+  description = "Ansible SSH key for connection"
+  default = "/var/iac-dev-container-data/id_ecdsa"
+}
+
