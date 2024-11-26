@@ -22,6 +22,24 @@ jobs:
         with:
           terraform_version: 1.5.6  # Replace with your required version
 
+      # Step 3: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      # Install Python dependencies
+      - name: Install Python and Dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install docker>=5.0.0
+          python3 -m pip show docker
+      
+      - name: Display Python version and path
+        run: |
+          which python3
+          which docker
+
       # Step 4: Install Ansible
       - name: Install Ansible
         run: |
