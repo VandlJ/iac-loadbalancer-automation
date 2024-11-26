@@ -5,7 +5,7 @@
 
 - name: Generate Apache Load Balancer configuration
   template:
-    src: apache
+    src: "{{ role_path }}/templates/apache"
     dest: /tmp/apache/apache.conf
 
 - name: Install Apache webserver in Docker container as Load Balancer

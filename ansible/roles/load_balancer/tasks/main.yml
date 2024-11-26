@@ -38,7 +38,7 @@
 
 - name: Generate Apache Load Balancer configuration
   template:
-    src: apache
+    src: ansible/roles/load_balancer/templates/apache
     dest: /tmp/apache/apache.conf
 
 - name: Install Apache webserver in Docker container as Load Balancer
