@@ -34,7 +34,6 @@ jobs:
         run: |
           echo "$SSH_PRIVATE_KEY" > id_ecdsa
           chmod 600 id_ecdsa
-          cat id_ecdsa
 
       - name: Write SSH Public Key
         env:
