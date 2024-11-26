@@ -2,10 +2,11 @@
   apt:
     update_cache: yes
 
-- name: Install Apache
-  apt:- name: Update apt cache
+- name: Install Python3 pip if not installed
   apt:
-    update_cache: yes
+    name: python3-pip
+    state: present
+  become: yes
 
 - name: Install Docker
   apt:
@@ -18,6 +19,11 @@
     name: docker
     state: started
     enabled: yes
+  become: yes
+
+- name: Install Python Docker module
+  pip:
+    name: docker
   become: yes
 
 - name: Create a directory for Apache HTML files
@@ -47,31 +53,3 @@
       - "80:80"
     volumes:
       - /tmp/apache_html:/usr/local/apache2/htdocs/
-    name: apache2
-    state: present
-
-# Ujistěte se, že Apache služba běží
-- name: Ensure Apache service is running
-  systemd:
-    name: apache2
-    state: started
-    enabled: yes
-
-# Vytvoření adresáře pro HTML soubory
-- name: Create a directory for Apache HTML files
-  file:
-    path: /var/www/html
-    state: directory
-    mode: '0755'
-
-# Vytvoření jednoduché index.html stránky
-- name: Create a simple index.html file
-  copy:
-    dest: /var/www/html/index.html
-    content: |
-      <html>
-      <head><title>Backend</title></head>
-      <body>
-      <h1>This is Backend Server {{ ansible_host }}</h1>
-      </body>
-      </html>
