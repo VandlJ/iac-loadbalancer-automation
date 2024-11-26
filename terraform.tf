@@ -72,7 +72,7 @@ resource "opennebula_virtual_machine" "backend-node" {
   }
 }
 
-# Load balancer (NGINX)
+# Load balancer (Apache)
 resource "opennebula_virtual_machine" "load-balancer" {
   name         = "apache-load-balancer"
   description  = "Apache Load Balancer"

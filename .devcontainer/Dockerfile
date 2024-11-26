@@ -1,5 +1,5 @@
 FROM ubuntu:20.04
-LABEL maintainer="maxmilio@kiv.zcu.cz" \
+LABEL maintainer="vandl@students.zcu.cz" \
     org.opencontainers.image.source="https://github.com/maxotta/iac-dev-docker"
 
 ARG WORKSPACE_DIR=/workspace
