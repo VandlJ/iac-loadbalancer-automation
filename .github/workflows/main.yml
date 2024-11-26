@@ -61,4 +61,4 @@ jobs:
 
       # Step 12: Run Ansible playbook
       - name: Run Ansible Playbook
-        run: ansible-playbook -i ansible/inventory.yml ansible/playbook.yml
+        run: ansible-playbook -i ansible/inventory ansible/playbook.yml
