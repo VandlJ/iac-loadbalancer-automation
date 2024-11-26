@@ -1,3 +1,11 @@
+[all]
+%{ for ip in load_balancer ~}
+${ip}
+%{ endfor ~}
+%{ for ip in backend_nodes ~}
+${ip}
+%{ endfor ~}
+
 [load_balancer]
 %{ for ip in load_balancer ~}
 ${ip}

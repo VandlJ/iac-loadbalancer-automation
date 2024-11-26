@@ -1,5 +1,5 @@
 - name: Create venv and prepare environment
-  hosts: backends
+  hosts: all
   tasks:
     - name: Run preparation tasks
       include_tasks: roles/prepare_env.yml
@@ -11,12 +11,6 @@
   tasks:
     - name: Continue with tasks after venv setup
       include_tasks: roles/backend/tasks/main_tasks.yml
-
-- name: Prepare environment for load balancer
-  hosts: load_balancer
-  tasks:
-    - name: Run preparation tasks
-      include_tasks: roles/prepare_env.yml
 
 - name: Configure and run load balancer with venv interpreter
   hosts: load_balancer

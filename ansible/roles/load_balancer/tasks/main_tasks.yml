@@ -5,8 +5,9 @@
 
 - name: Generate Apache Load Balancer configuration
   template:
-    src: "{{ role_path }}/templates/apache"
+    src: "/home/runner/work/iac-loadbalancer-automation/iac-loadbalancer-automation/ansible/roles/load_balancer/templates/apache"
     dest: /tmp/apache/apache.conf
+
 
 - name: Install Apache webserver in Docker container as Load Balancer
   docker_container:
