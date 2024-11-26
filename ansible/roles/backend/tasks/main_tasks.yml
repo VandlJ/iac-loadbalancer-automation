@@ -5,7 +5,7 @@
 
 - name: Deploy dynamic index.html using template
   template:
-    src:  "/home/runner/work/iac-loadbalancer-automation/iac-loadbalancer-automation/ansible/roles/backend/templates/html.j2"
+    src:  "/home/runner/work/iac-loadbalancer-automation/iac-loadbalancer-automation/ansible/roles/backend/templates/index.html.j2"
     dest: /tmp/apache_html/index.html
   become: yes
 
