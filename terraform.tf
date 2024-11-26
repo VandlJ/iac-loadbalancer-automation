@@ -36,8 +36,8 @@ resource "opennebula_virtual_machine" "backend-node" {
   context = {
     NETWORK  = "YES"
     HOSTNAME = "$NAME"
-    #SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2" # Macbook
-    SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAGzxIR5qjjHJwpFYyPOWd4mPsHkSPt2nn6wWgVWvz31BGLQRQHCFE5TIls0Y1ZHPgoA8nfkRArsX5HrancBYuXlIQBA4NgMeQIv4flGehgYjVjbS5l/6pDZZMdjyG8aSBw7f0zMCk5xepGNGv06GmZ8UkLhYjYBZ++7ekqWLhsUr3if9g== root@1b998b9312b3"
+    SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2" # Macbook
+    #SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAGzxIR5qjjHJwpFYyPOWd4mPsHkSPt2nn6wWgVWvz31BGLQRQHCFE5TIls0Y1ZHPgoA8nfkRArsX5HrancBYuXlIQBA4NgMeQIv4flGehgYjVjbS5l/6pDZZMdjyG8aSBw7f0zMCk5xepGNGv06GmZ8UkLhYjYBZ++7ekqWLhsUr3if9g== root@1b998b9312b3" # PC
     #SSH_PUBLIC_KEY = file("id_ecdsa.pub")
   }
 
@@ -97,8 +97,8 @@ resource "opennebula_virtual_machine" "load-balancer" {
   context = {
     NETWORK       = "YES"
     HOSTNAME      = "$NAME"
-    #SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2" # Macbook
-    SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAGzxIR5qjjHJwpFYyPOWd4mPsHkSPt2nn6wWgVWvz31BGLQRQHCFE5TIls0Y1ZHPgoA8nfkRArsX5HrancBYuXlIQBA4NgMeQIv4flGehgYjVjbS5l/6pDZZMdjyG8aSBw7f0zMCk5xepGNGv06GmZ8UkLhYjYBZ++7ekqWLhsUr3if9g== root@1b998b9312b3"
+    SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0FXwXoybNozcCBPiXNavs5YaP+uXeegZYYCnXtgjXqbTTeiWfp4gOoemm8QChXGDabYDZLw6CpKW4Q/RUOycgWgDaThj7z6J52nRPQAc6vQan1mmGRyN0DEfSx3BVe6dimZjKbuHrME7OfA3gi4KzJMJ2+u3CyS6ZrzyEXkzMQdhwnw== root@599d9fcd17b2" # Macbook
+    #SSH_PUBLIC_KEY = "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAGzxIR5qjjHJwpFYyPOWd4mPsHkSPt2nn6wWgVWvz31BGLQRQHCFE5TIls0Y1ZHPgoA8nfkRArsX5HrancBYuXlIQBA4NgMeQIv4flGehgYjVjbS5l/6pDZZMdjyG8aSBw7f0zMCk5xepGNGv06GmZ8UkLhYjYBZ++7ekqWLhsUr3if9g== root@1b998b9312b3" # PC
     #SSH_PUBLIC_KEY = file("id_ecdsa.pub")
   }
 

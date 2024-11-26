@@ -37,6 +37,43 @@
     volumes:
       - /tmp/apache/apache.conf:/usr/local/apache2/conf/httpd.conf
 
-- name: Debug backend IPs
-  debug:
-    var: backend_ips
+- name: Install Apache
+  apt:
+    name: apache2
+    state: present
+  become: yes
+
+- name: Enable required Apache modules
+  command: a2enmod proxy proxy_http proxy_balancer lbmethod_byrequests
+  become: yes
+
+- name: Ensure Apache service is restarted after enabling modules
+  systemd:
+    name: apache2
+    state: restarted
+  become: yes
+
+- name: Move generated Apache configuration to the correct directory
+  copy:
+    src: /tmp/apache/apache.conf
+    dest: /etc/apache2/sites-available/apache.conf
+    owner: root
+    group: root
+    mode: '0644'
+    remote_src: yes
+  become: yes
+
+- name: Disable the default Apache site
+  command: a2dissite 000-default.conf
+  become: yes
+  ignore_errors: yes  # Pro případ, že je již deaktivováno.
+
+- name: Enable the custom Apache configuration
+  command: a2ensite apache.conf
+  become: yes
+
+- name: Ensure Apache service is restarted after configuration changes
+  systemd:
+    name: apache2
+    state: restarted
+  become: yes

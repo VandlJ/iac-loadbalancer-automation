@@ -1,0 +1,32 @@
+# Ignore temporary system and editor files
+.DS_Store
+*.swp
+*.swo
+*.tmp
+
+# Ignore project-specific folders and files
+ansible/inventory 
+ansible/roles/load_balancer/templates/apache  
+terraform.tfstate  
+terraform.tfstate.backup  
+*.tfstate.*  
+.terraform/  
+*.lock.hcl  
+
+# Ignore devcontainer and Docker-related outputs
+.vscode/  
+docker-compose.override.yml  
+
+# Ignore sensitive data such as private keys and certificates
+*.pem  # PEM-format key files
+*.key  # Private key files
+*.crt  # Certificate files
+
+# Ignore build and log files
+*.log  # Log files
+*.bak  # Backup files
+
+# Ignore Python cache files (if Python is used in the project)
+__pycache__/  
+*.pyc  
+*.pyo

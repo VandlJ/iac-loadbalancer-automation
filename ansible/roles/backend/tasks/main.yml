@@ -2,22 +2,27 @@
   apt:
     update_cache: yes
 
-- name: Install Apache
+- name: Install Docker
   apt:
-    name: apache2
+    name: docker.io
     state: present
   become: yes
 
-- name: Ensure Apache service is running
+- name: Ensure Docker service is running
   systemd:
-    name: apache2
+    name: docker
     state: started
     enabled: yes
   become: yes
 
+- name: Create a directory for Apache HTML files
+  file:
+    path: /tmp/apache_html
+    state: directory
+
 - name: Create a simple index.html file
   copy:
-    dest: /var/www/html/index.html
+    dest: /tmp/apache_html/index.html
     content: |
       <html>
       <head><title>Backend</title></head>
@@ -25,3 +30,15 @@
       <h1>This is Backend Server {{ ansible_host }}</h1>
       </body>
       </html>
+
+- name: Run Apache container on backend
+  docker_container:
+    name: apache_backend
+    image: httpd:latest
+    state: started
+    restart_policy: unless-stopped
+    pull: yes
+    ports:
+      - "80:80"
+    volumes:
+      - /tmp/apache_html:/usr/local/apache2/htdocs/
