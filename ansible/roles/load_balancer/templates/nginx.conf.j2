@@ -1,0 +1,19 @@
+# NGINX Load Balancer Configuration
+worker_processes 1;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    upstream backend_servers {
+                server 147.228.173.145;
+            }
+
+    server {
+        listen 80;
+        location / {
+            proxy_pass http://backend_servers;
+        }
+    }
+}

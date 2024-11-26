@@ -2,7 +2,7 @@
   hosts: all
   tasks:
     - name: Run preparation tasks
-      include_tasks: roles/prepare_env.yml
+      include_tasks: roles/prepare.yml
 
 - name: Run tasks with venv interpreter
   hosts: backends
@@ -10,7 +10,7 @@
     ansible_python_interpreter: /opt/venv/bin/python
   tasks:
     - name: Continue with tasks after venv setup
-      include_tasks: roles/backend/tasks/main_tasks.yml
+      include_tasks: roles/backend/tasks/main.yml
 
 - name: Configure and run load balancer with venv interpreter
   hosts: load_balancer
@@ -18,4 +18,4 @@
     ansible_python_interpreter: /opt/venv/bin/python
   tasks:
     - name: Run load balancer tasks
-      include_tasks: roles/load_balancer/tasks/main_tasks.yml
+      include_tasks: roles/load_balancer/tasks/main.yml

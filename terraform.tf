@@ -36,7 +36,7 @@ resource "opennebula_virtual_machine" "backend-node" {
   }
 
   disk {
-    image_id = 687 
+    image_id = 687
     target   = "vda"
     size     = 12000 
   }
@@ -72,10 +72,10 @@ resource "opennebula_virtual_machine" "backend-node" {
   }
 }
 
-# Load balancer (Apache)
+# Load balancer (NGINX)
 resource "opennebula_virtual_machine" "load-balancer" {
-  name         = "apache-load-balancer"
-  description  = "Apache Load Balancer"
+  name         = "nginx-load-balancer"
+  description  = "NGINX Load Balancer"
   cpu          = 1
   vcpu         = 1
   memory       = 1024
@@ -94,7 +94,7 @@ resource "opennebula_virtual_machine" "load-balancer" {
   }
 
   disk {
-    image_id = 687
+    image_id = 687 
     target   = "vda"
     size     = 12000
   }
@@ -133,10 +133,10 @@ resource "local_file" "ansible_inventory" {
   filename = "ansible/inventory"
 }
 
-resource "local_file" "apache_config" {
-  content = templatefile("apache.conf.tmpl", 
-  {
-    backend_nodes = opennebula_virtual_machine.backend-node.*.ip
-  })
-  filename = "ansible/roles/load_balancer/templates/apache"
+resource "local_file" "nginx_config" {
+  content = templatefile("nginx.conf.tmpl",
+    {
+      backend_nodes = opennebula_virtual_machine.backend-node.*.ip
+    })
+  filename = "ansible/roles/load_balancer/templates/nginx.conf.j2"
 }
