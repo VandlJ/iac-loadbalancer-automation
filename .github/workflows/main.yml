@@ -6,7 +6,7 @@ on:
 
 jobs:
   push_to_registries:
-    name: Push Docker image to the ghcr.io registry
+    name: Run Apache Load Balancer
     runs-on: ubuntu-20.04
     permissions:
         contents: read
@@ -21,24 +21,6 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.5.6  # Replace with your required version
-
-      # Step 3: Set up Python
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.9
-
-      # Install Python dependencies
-      - name: Install Python and Dependencies
-        run: |
-          python3 -m pip install --upgrade pip
-          python3 -m pip install docker>=5.0.0
-          python3 -m pip show docker
-      
-      - name: Display Python version and path
-        run: |
-          which python3
-          which docker
 
       # Step 4: Install Ansible
       - name: Install Ansible
@@ -63,6 +45,9 @@ jobs:
         run: |
           echo "$SSH_PUBLIC_KEY" > id_ecdsa.pub
           chmod 600 id_ecdsa.pub        
+
+      - name: Fix provider permissions
+        run: chmod -R +x .terraform/providers
 
       # Step 5: Initialize Terraform
       - name: Initialize Terraform
