@@ -2,10 +2,14 @@
   apt:
     update_cache: yes
 
-- name: Install Python3 pip if not installed
+- name: Install pipx
   apt:
-    name: python3-pip
+    name: pipx
     state: present
+  become: yes
+
+- name: Install Python Docker module using pipx
+  command: pipx install docker
   become: yes
 
 - name: Install Docker
@@ -19,11 +23,6 @@
     name: docker
     state: started
     enabled: yes
-  become: yes
-
-- name: Install Python Docker module
-  pip:
-    name: docker
   become: yes
 
 - name: Create a directory for Apache HTML files
