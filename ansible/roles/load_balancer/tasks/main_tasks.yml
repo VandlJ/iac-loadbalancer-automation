@@ -8,7 +8,6 @@
     src: "/home/runner/work/iac-loadbalancer-automation/iac-loadbalancer-automation/ansible/roles/load_balancer/templates/apache"
     dest: /tmp/apache/apache.conf
 
-
 - name: Install Apache webserver in Docker container as Load Balancer
   docker_container:
     name: apache_load_balancer

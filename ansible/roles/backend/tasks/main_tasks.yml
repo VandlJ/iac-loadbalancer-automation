@@ -3,16 +3,11 @@
     path: /tmp/apache_html
     state: directory
 
-- name: Create a simple index.html file
-  copy:
+- name: Deploy dynamic index.html using template
+  template:
+    src:  "/home/runner/work/iac-loadbalancer-automation/iac-loadbalancer-automation/ansible/roles/backend/templates/html.j2"
     dest: /tmp/apache_html/index.html
-    content: |
-      <html>
-      <head><title>Backend</title></head>
-      <body>
-      <h1>This is Backend Server {{ ansible_host }}</h1>
-      </body>
-      </html>
+  become: yes
 
 - name: Run Apache container on backend
   docker_container:
