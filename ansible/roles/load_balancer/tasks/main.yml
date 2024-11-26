@@ -2,6 +2,12 @@
   apt:
     update_cache: yes
 
+- name: Install Python3 pip if not installed
+  apt:
+    name: python3-pip
+    state: present
+  become: yes
+
 - name: Install Docker
   apt:
     name: docker.io
@@ -13,6 +19,11 @@
     name: docker
     state: started
     enabled: yes
+  become: yes
+
+- name: Install Python Docker module
+  pip:
+    name: docker
   become: yes
 
 - name: Create a directory for Apache config
