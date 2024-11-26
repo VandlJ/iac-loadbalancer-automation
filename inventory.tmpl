@@ -1,11 +1,11 @@
 [load_balancer]
 %{ for ip in load_balancer ~}
-${ip}
+${ip} ansible_python_interpreter=/opt/venv/bin/python
 %{ endfor ~}
 
 [backends]
 %{ for ip in backend_nodes ~}
-${ip}
+${ip} ansible_python_interpreter=/opt/venv/bin/python
 %{ endfor ~}
 
 [all:vars]

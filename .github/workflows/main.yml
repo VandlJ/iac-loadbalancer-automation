@@ -63,4 +63,4 @@ jobs:
 
       # Step 12: Run Ansible playbook
       - name: Run Ansible Playbook
-        run: ANSIBLE_PYTHON_INTERPRETER=/opt/venv/bin/python ansible-playbook -i ansible/inventory ansible/playbook.yml
+        run: ansible-playbook -i ansible/inventory ansible/playbook.yml
