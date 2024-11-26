@@ -1,3 +1,11 @@
+[all]
+%{ for ip in load_balancer ~}
+${ip}
+%{ endfor ~}
+%{ for ip in backend_nodes ~}
+${ip}
+%{ endfor ~}
+
 [load_balancer]
 %{ for ip in load_balancer ~}
 ${ip}
@@ -10,4 +18,5 @@ ${ip}
 
 [all:vars]
 ansible_user=${vm_admin_user}
-ansible_ssh_private_key_file=${ssh_key}
+ansible_ssh_private_key_file=id_ecdsa
+ansible_ssh_common_args='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'

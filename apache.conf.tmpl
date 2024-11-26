@@ -1,0 +1,13 @@
+<Proxy "balancer://mycluster">
+    %{ for ip in backend_nodes ~}
+    BalancerMember http://${ip}:80
+    %{ endfor ~}
+    ProxySet lbmethod=byrequests
+</Proxy>
+
+<VirtualHost *:80>
+    ProxyPass "/balancer-manager" "balancer://mycluster/"
+    ProxyPassReverse "/balancer-manager" "balancer://mycluster/"
+    ProxyPass "/" "balancer://mycluster/"
+    ProxyPassReverse "/" "balancer://mycluster/"
+</VirtualHost>

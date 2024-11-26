@@ -1,11 +1,21 @@
-- name: Configure Backends
-  hosts: backends
-  become: true
-  roles:
-    - backend
+- name: Create venv and prepare environment
+  hosts: all
+  tasks:
+    - name: Run preparation tasks
+      include_tasks: roles/prepare_env.yml
 
-- name: Configure Load Balancer
+- name: Run tasks with venv interpreter
+  hosts: backends
+  vars:
+    ansible_python_interpreter: /opt/venv/bin/python
+  tasks:
+    - name: Continue with tasks after venv setup
+      include_tasks: roles/backend/tasks/main_tasks.yml
+
+- name: Configure and run load balancer with venv interpreter
   hosts: load_balancer
-  become: true
-  roles:
-    - load_balancer
+  vars:
+    ansible_python_interpreter: /opt/venv/bin/python
+  tasks:
+    - name: Run load balancer tasks
+      include_tasks: roles/load_balancer/tasks/main_tasks.yml
