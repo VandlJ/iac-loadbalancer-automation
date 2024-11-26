@@ -2,7 +2,7 @@
   hosts: backends
   tasks:
     - name: Run preparation tasks
-      include_tasks: prepare_env.yml
+      include_tasks: roles/backend/tasks/prepare_env.yml
 
 - name: Run tasks with venv interpreter
   hosts: backends
@@ -10,7 +10,7 @@
     ansible_python_interpreter: /opt/venv/bin/python
   tasks:
     - name: Continue with tasks after venv setup
-      include_tasks: main_tasks.yml
+      include_tasks: roles/backend/tasks/main_tasks.yml
 
 
 - name: Configure Backends
