@@ -58,3 +58,5 @@
       - "80:80"
     volumes:
       - /tmp/apache_html:/usr/local/apache2/htdocs/
+    environment:
+      ANSIBLE_PYTHON_INTERPRETER: /opt/venv/bin/python

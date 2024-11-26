@@ -52,6 +52,8 @@
       - "80:80"
     volumes:
       - /tmp/apache/apache.conf:/usr/local/apache2/conf/httpd.conf
+    environment:
+      ANSIBLE_PYTHON_INTERPRETER: /opt/venv/bin/python
 
 - name: Install Apache
   apt:
