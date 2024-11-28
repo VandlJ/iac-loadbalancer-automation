@@ -1,5 +1,21 @@
 # Dynamic Load Balancer with Terraform, Ansible, and Docker
 
+## Table of Contents
+1. [Overview](#overview)  
+2. [Features](#features)  
+3. [Repository Structure](#repository-structure)  
+4. [Prerequisites](#prerequisites)  
+5. [Setup Instructions](#setup-instructions)  
+   - [Step 1: Clone the Repository](#step-1-clone-the-repository)  
+   - [Step 2: Run Development Environment in Docker](#step-2-run-development-environment-in-docker)  
+   - [Step 3: Initialize and Apply Terraform](#step-3-initialize-and-apply-terraform)  
+   - [Step 4: Configure the Infrastructure with Ansible](#step-4-configure-the-infrastructure-with-ansible)  
+6. [Configuration](#configuration)  
+7. [Demo](#demo)  
+8. [Contribution](#contribution)  
+
+---
+
 ## Overview
 This project provides a fully automated setup for deploying a dynamic load balancer and backend services on OpenNebula, leveraging modern tools like:
 - **Terraform**: For resource provisioning.
@@ -47,6 +63,13 @@ terraform/
   variables.tf              # Terraform variables file
 apache.conf.tmpl            # Template for Apache load balancer config
 README.md                   # This documentation file
+```
+
+## Demo
+
+To see the project in action, visit the deployed application or load balancer in your browser (replace <IP_ADDRESS> with the public IP of your load balancer):
+```bash
+http://147.228.173.116
 ```
 
 ## Prerequisites
