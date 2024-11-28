@@ -65,9 +65,12 @@ README.md                   # This documentation file
 ```
 
 ## Demo
-
 To see the project in action, visit the deployed application in your browser here:
 <a href="http://147.228.173.116" target="_blank">Load Balancer</a>
+or put this command in your terminal:
+```bash
+curl http://147.228.173.116
+```
 
 ## Prerequisites
 Before getting started, ensure the following tools are installed on your system:
@@ -76,7 +79,6 @@ Before getting started, ensure the following tools are installed on your system:
 - **Ansible**: For configuring nodes.
 
 ## Setup Instructions
-
 ### Step 1: Clone the Repository
 ```bash
 git clone https://github.com/VandlJ/iac-loadbalancer-automation.git
