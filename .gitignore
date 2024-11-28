@@ -6,6 +6,7 @@ __pycache__/
 # Ignore Terraform state and backup files
 *.tfstate
 *.tfstate.backup
+*.lock.hcl
 
 # Ignore temporary Ansible artifacts
 *.retry
