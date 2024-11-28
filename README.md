@@ -63,11 +63,7 @@ git clone https://github.com/VandlJ/iac-loadbalancer-automation.git
 cd iac-loadbalancer-automation
 ```
 
-### Step 2: Start the Development Container
-```bash
-docker-compose up -d
-```
-This starts a pre-configured development environment using Docker.
+### Step 2: Run directory inside of Docker container
 
 ### Step 3: Initialize and Apply Terraform
 ```bash
