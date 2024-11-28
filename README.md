@@ -67,9 +67,7 @@ README.md                   # This documentation file
 ## Demo
 
 To see the project in action, visit the deployed application or load balancer in your browser:
-```bash
 [Load balancer](http://147.228.173.116)
-```
 
 ## Prerequisites
 Before getting started, ensure the following tools are installed on your system:
