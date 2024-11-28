@@ -66,8 +66,8 @@ README.md                   # This documentation file
 
 ## Demo
 
-To see the project in action, visit the deployed application or load balancer in your browser:
-[Load balancer](http://147.228.173.116)
+To see the project in action, visit the deployed application in your browser here:
+<a href="http://147.228.173.116" target="_blank">Load Balancer</a>
 
 ## Prerequisites
 Before getting started, ensure the following tools are installed on your system:
