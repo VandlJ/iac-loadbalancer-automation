@@ -29,3 +29,6 @@ docker-compose.override.yml
 *.class
 *.o
 *.out
+
+# Ignore MacOS .DS_Store file
+.DS_Store
